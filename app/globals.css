@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 9%;
+    --primary: 358 73% 53%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 8%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 46%;
+    --accent: 0 0% 96%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 72% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 100% / 0.08;
+    --input: 0 0% 100% / 0.08;
+    --ring: 358 73% 53%;
+    --radius: 0.625rem;
+
+    --background-base: #000000;
+    --background-secondary: #080808;
+    --surface: #0f0f10;
+    --surface-elevated: #141414;
+    --primary-text: #ffffff;
+    --secondary-text: rgba(255, 255, 255, 0.7);
+    --muted-text: rgba(255, 255, 255, 0.5);
+    --accent-main: #df2c2f;
+    --accent-main-hover: #b82326;
+    --accent-soft: rgba(223, 44, 47, 0.1);
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --grid-dark: rgba(255, 255, 255, 0.02);
+    --grid-light: rgba(223, 44, 47, 0.03);
+    --page-light: #ffffff;
+    --page-dark-text: #000000;
+    --page-dark-muted: rgba(0, 0, 0, 0.7);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html,
+  body {
+    @apply bg-background text-foreground;
+    min-height: 100%;
+  }
+
+  body {
+    background:
+      radial-gradient(circle at 20% 18%, rgba(223, 44, 47, 0.08), transparent 22%),
+      radial-gradient(circle at 78% 72%, rgba(223, 44, 47, 0.05), transparent 22%),
+      linear-gradient(180deg, var(--background-base) 0%, var(--background-secondary) 100%);
+    font-feature-settings: "tnum" on;
+    overflow: hidden;
+  }
+
+  button {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+@layer utilities {
+  .viewport-shell {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: var(--background-base);
+  }
+
+  .background-bleed {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 50% 18%, rgba(223, 44, 47, 0.12), transparent 24%),
+      linear-gradient(180deg, #000 0%, #080808 100%);
+  }
+
+  .slide-stage {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    aspect-ratio: 16 / 9;
+    width: min(92vw, calc(92vh * 16 / 9));
+    max-height: 92vh;
+    overflow: hidden;
+    border-radius: 28px;
+    border: 1px solid var(--border-subtle);
+    background: #000;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+  }
+
+  .font-display {
+    font-family: var(--font-sans), sans-serif;
+  }
+}
