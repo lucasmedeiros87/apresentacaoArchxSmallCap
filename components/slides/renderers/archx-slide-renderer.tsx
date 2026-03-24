@@ -3,7 +3,9 @@
 import { motion } from "framer-motion"
 import { ArrowRight, Building2, Landmark, ShieldCheck, Sparkles } from "lucide-react"
 
+import { getSlideTranslation, isRtlLocale } from "@/content/presentation-i18n"
 import { ArchxHeroGlobe } from "@/components/hero/archx-hero-globe"
+import { usePresentationLocale } from "@/components/presentation/presentation-locale-context"
 import { SlideSurface } from "@/components/presentation/slide-surface"
 import { cn } from "@/lib/utils"
 import type { ArchxSlide, SlideContentStatus, SlideVisualType } from "@/types/presentation"
@@ -30,11 +32,29 @@ const themeClasses = {
 } as const
 
 export function ArchxSlideRenderer({ slide }: ArchxSlideRendererProps) {
-  const theme = themeClasses[slide.theme]
-  const isLight = slide.theme === "dark-minimal"
+  const { locale } = usePresentationLocale()
+  const isRtl = isRtlLocale(locale)
+  const translated = getSlideTranslation(slide.id, locale)
+  const localizedSlide: ArchxSlide = translated
+    ? {
+        ...slide,
+        eyebrow: translated.eyebrow ?? slide.eyebrow,
+        headline: translated.headline ?? slide.headline,
+        subheadline: translated.subheadline ?? slide.subheadline,
+        body: translated.body ?? slide.body,
+        closingLine: translated.closingLine ?? slide.closingLine,
+        footerNote: translated.footerNote ?? slide.footerNote,
+        bullets: translated.bullets ?? slide.bullets,
+        groups: translated.groups ?? slide.groups,
+        cta: translated.cta ?? slide.cta,
+      }
+    : slide
 
-  if (slide.id === "slide-01-cover") {
-    return <ArchxCoverHero slide={slide} />
+  const theme = themeClasses[localizedSlide.theme]
+  const isLight = localizedSlide.theme === "dark-minimal"
+
+  if (localizedSlide.id === "slide-01-cover") {
+    return <ArchxCoverHero slide={localizedSlide} isRtl={isRtl} />
   }
 
   if (slide.id === "slide-02-who-we-are") {
@@ -65,8 +85,8 @@ export function ArchxSlideRenderer({ slide }: ArchxSlideRendererProps) {
     return <ArchxPaymentRailsSlide slide={slide} />
   }
 
-  if (slide.id === "slide-09-compliance" || slide.id === "slide-02-compliance") {
-    return <ArchxComplianceSlide slide={slide} />
+  if (localizedSlide.id === "slide-09-compliance" || localizedSlide.id === "slide-02-compliance") {
+    return <ArchxComplianceSlide slide={localizedSlide} isRtl={isRtl} />
   }
 
   if (slide.id === "slide-10-global-presence") {
@@ -85,24 +105,24 @@ export function ArchxSlideRenderer({ slide }: ArchxSlideRendererProps) {
     return <ArchxDifferentialsSlide slide={slide} />
   }
 
-  if (slide.id === "slide-03-products") {
-    return <ArchxProductsSlide slide={slide} />
+  if (localizedSlide.id === "slide-03-products") {
+    return <ArchxProductsSlide slide={localizedSlide} isRtl={isRtl} />
   }
 
-  if (slide.id === "slide-14-commercial-model" || slide.id === "slide-04-prices") {
-    return <ArchxCommercialModelSlide slide={slide} />
+  if (localizedSlide.id === "slide-14-commercial-model" || localizedSlide.id === "slide-04-prices") {
+    return <ArchxCommercialModelSlide slide={localizedSlide} isRtl={isRtl} />
   }
 
-  if (slide.id === "slide-15-closing" || slide.id === "slide-05-closing") {
-    return <ArchxClosingSlide slide={slide} />
+  if (localizedSlide.id === "slide-15-closing" || localizedSlide.id === "slide-05-closing") {
+    return <ArchxClosingSlide slide={localizedSlide} isRtl={isRtl} />
   }
 
   return (
     <SlideSurface
-      eyebrow={slide.eyebrow}
-      title={slide.headline}
-      description={slide.subheadline}
-      media={<VisualPanel slide={slide} />}
+      eyebrow={localizedSlide.eyebrow}
+      title={localizedSlide.headline}
+      description={localizedSlide.subheadline}
+      media={<VisualPanel slide={localizedSlide} />}
       tone={isLight ? "light" : "dark"}
       contentClassName={theme.content}
       mediaClassName={theme.media}
@@ -112,19 +132,19 @@ export function ArchxSlideRenderer({ slide }: ArchxSlideRendererProps) {
           <div className="flex flex-wrap items-center gap-3">
             <StatusBadge status={slide.status} />
             <div className="text-[11px] uppercase tracking-[0.32em] text-[color:var(--muted-text)]">
-              {slide.visualType}
+              {localizedSlide.visualType}
             </div>
           </div>
 
-          {slide.body ? (
+          {localizedSlide.body ? (
             <p className={cn("max-w-3xl text-base leading-7", isLight ? "text-[color:var(--page-dark-muted)]" : "text-[color:var(--secondary-text)]")}>
-              {slide.body}
+              {localizedSlide.body}
             </p>
           ) : null}
 
-          <BulletBlock slide={slide} />
+          <BulletBlock slide={localizedSlide} />
 
-          {slide.closingLine ? (
+          {localizedSlide.closingLine ? (
             <div
               className={cn(
                 "rounded-[18px] border px-4 py-4 text-sm leading-6",
@@ -133,7 +153,7 @@ export function ArchxSlideRenderer({ slide }: ArchxSlideRendererProps) {
                   : "border-white/7 bg-white/[0.03] text-[color:var(--primary-text)]",
               )}
             >
-              {slide.closingLine}
+              {localizedSlide.closingLine}
             </div>
           ) : null}
         </div>
@@ -145,20 +165,20 @@ export function ArchxSlideRenderer({ slide }: ArchxSlideRendererProps) {
             <MetaCard light={slide.theme === "dark-minimal"} label="Motion" value={slide.visualNotes.motionHint ?? "Subtle panel transition"} />
           </div>
 
-          {slide.footerNote ? (
+          {localizedSlide.footerNote ? (
             <div
               className={cn(
                 "rounded-[18px] border px-4 py-3 text-sm leading-6",
-                slide.theme === "dark-minimal"
+                localizedSlide.theme === "dark-minimal"
                   ? "border-black/8 bg-black/[0.02] text-[color:var(--page-dark-muted)]"
                   : "border-white/7 bg-white/[0.03] text-[color:var(--secondary-text)]",
               )}
             >
-              {slide.footerNote}
+              {localizedSlide.footerNote}
             </div>
           ) : null}
 
-          {slide.cta ? (
+          {localizedSlide.cta ? (
             <div
               className={cn(
                 "rounded-[22px] border px-5 py-5",
@@ -169,10 +189,10 @@ export function ArchxSlideRenderer({ slide }: ArchxSlideRendererProps) {
             >
               <div className="text-[11px] uppercase tracking-[0.32em] text-[color:var(--accent-main)]">CTA</div>
               <div className={cn("mt-2 text-lg font-semibold", isLight ? "text-[color:var(--page-dark-text)]" : "text-[color:var(--primary-text)]")}>
-                {slide.cta.title}
+                {localizedSlide.cta.title}
               </div>
               <div className={cn("mt-1 text-sm leading-6", isLight ? "text-[color:var(--page-dark-muted)]" : "text-[color:var(--secondary-text)]")}>
-                {slide.cta.text}
+                {localizedSlide.cta.text}
               </div>
             </div>
           ) : null}
@@ -182,7 +202,10 @@ export function ArchxSlideRenderer({ slide }: ArchxSlideRendererProps) {
   )
 }
 
-function ArchxCoverHero({ slide }: { slide: ArchxSlide }) {
+function ArchxCoverHero({ slide, isRtl = false }: { slide: ArchxSlide; isRtl?: boolean }) {
+  const textDirection = isRtl ? "rtl" : "ltr"
+  const textAlign = isRtl ? "text-right" : "text-left"
+
   return (
     <section className="relative h-full px-8 py-8">
       <div className="grid h-full grid-cols-12 gap-6">
@@ -190,7 +213,11 @@ function ArchxCoverHero({ slide }: { slide: ArchxSlide }) {
           initial={{ opacity: 0, y: 22 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-          className="col-span-12 flex h-full flex-col justify-center rounded-[30px] border border-white/8 bg-[linear-gradient(180deg,rgba(0,0,0,0.98),rgba(7,7,7,0.98))] px-12 py-12 lg:col-span-7"
+          className={cn(
+            "col-span-12 flex h-full flex-col justify-center rounded-[30px] border border-white/8 bg-[linear-gradient(180deg,rgba(0,0,0,0.98),rgba(7,7,7,0.98))] px-12 py-12 lg:col-span-7",
+            textAlign,
+          )}
+          dir={textDirection}
         >
           <div className="max-w-[680px]">
             <div className="mb-6 text-[12px] font-medium uppercase tracking-[0.18em] text-[color:var(--accent-main)]">{slide.eyebrow}</div>
@@ -1318,7 +1345,10 @@ function ArchxPaymentRailsSlide({ slide }: { slide: ArchxSlide }) {
   )
 }
 
-function ArchxComplianceSlide({ slide }: { slide: ArchxSlide }) {
+function ArchxComplianceSlide({ slide, isRtl = false }: { slide: ArchxSlide; isRtl?: boolean }) {
+  const textDirection = isRtl ? "rtl" : "ltr"
+  const textAlign = isRtl ? "text-right" : "text-left"
+
   const controlNodes = [
     { title: "KYC / KYB", className: "left-[9%] top-[18%]" },
     { title: "AML / CFT", className: "right-[9%] top-[20%]" },
@@ -1334,7 +1364,11 @@ function ArchxComplianceSlide({ slide }: { slide: ArchxSlide }) {
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
-          className="col-span-12 flex h-full flex-col overflow-hidden rounded-[30px] border border-white/8 bg-[linear-gradient(180deg,rgba(0,0,0,0.985),rgba(8,8,8,0.985))] px-10 py-9 lg:col-span-5"
+          className={cn(
+            "col-span-12 flex h-full flex-col overflow-hidden rounded-[30px] border border-white/8 bg-[linear-gradient(180deg,rgba(0,0,0,0.985),rgba(8,8,8,0.985))] px-10 py-9 lg:col-span-5",
+            textAlign,
+          )}
+          dir={textDirection}
         >
           <div className="max-w-[420px]">
             <div className="mb-5 text-[12px] font-medium uppercase tracking-[0.18em] text-[color:var(--accent-main)]">{slide.eyebrow}</div>
@@ -1769,7 +1803,10 @@ function ArchxDifferentialsSlide({ slide }: { slide: ArchxSlide }) {
   )
 }
 
-function ArchxProductsSlide({ slide }: { slide: ArchxSlide }) {
+function ArchxProductsSlide({ slide, isRtl = false }: { slide: ArchxSlide; isRtl?: boolean }) {
+  const textDirection = isRtl ? "rtl" : "ltr"
+  const textAlign = isRtl ? "text-right" : "text-left"
+
   const groups =
     slide.groups ?? [
       { title: "Recebimento local", items: [] },
@@ -1784,7 +1821,11 @@ function ArchxProductsSlide({ slide }: { slide: ArchxSlide }) {
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
-          className="col-span-12 flex h-full min-h-0 flex-col rounded-[30px] border border-white/8 bg-[linear-gradient(180deg,rgba(0,0,0,0.99),rgba(8,8,8,0.99))] px-10 py-9 lg:col-span-5"
+          className={cn(
+            "col-span-12 flex h-full min-h-0 flex-col rounded-[30px] border border-white/8 bg-[linear-gradient(180deg,rgba(0,0,0,0.99),rgba(8,8,8,0.99))] px-10 py-9 lg:col-span-5",
+            textAlign,
+          )}
+          dir={textDirection}
         >
           <div className="mb-3 text-[11px] font-medium uppercase tracking-[0.18em] text-[color:var(--accent-main)]">{slide.eyebrow}</div>
           <h2 className="font-display max-w-[430px] text-[2.66rem] font-bold leading-[0.95] tracking-[-0.05em] text-white">{slide.headline}</h2>
@@ -1832,7 +1873,10 @@ function ArchxProductsSlide({ slide }: { slide: ArchxSlide }) {
   )
 }
 
-function ArchxCommercialModelSlide({ slide }: { slide: ArchxSlide }) {
+function ArchxCommercialModelSlide({ slide, isRtl = false }: { slide: ArchxSlide; isRtl?: boolean }) {
+  const textDirection = isRtl ? "rtl" : "ltr"
+  const textAlign = isRtl ? "text-right" : "text-left"
+
   const rows = slide.bullets.map((item) => {
     const [service, rate] = item.split(" - ")
     return {
@@ -1850,7 +1894,7 @@ function ArchxCommercialModelSlide({ slide }: { slide: ArchxSlide }) {
         className="h-full overflow-hidden rounded-[32px] border border-black/8 bg-[linear-gradient(180deg,#f3eee6,#ece6dd)] shadow-[0_20px_60px_rgba(0,0,0,0.08)]"
       >
         <div className="relative grid h-full gap-5 px-9 py-8 lg:grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)]">
-          <div className="flex h-full min-h-0 flex-col pb-4">
+          <div className={cn("flex h-full min-h-0 flex-col pb-4", textAlign)} dir={textDirection}>
             <div className="mb-3 text-[11px] font-medium uppercase tracking-[0.18em] text-[#DF2C2F]">{slide.eyebrow}</div>
             <h2 className="font-display max-w-[480px] text-[2.6rem] font-bold leading-[0.96] tracking-[-0.05em] text-[#111115]">{slide.headline}</h2>
             <p className="mt-3 max-w-[520px] text-[0.98rem] leading-7 text-[#46413b]">{slide.subheadline}</p>
@@ -1892,7 +1936,10 @@ function ArchxCommercialModelSlide({ slide }: { slide: ArchxSlide }) {
   )
 }
 
-function ArchxClosingSlide({ slide }: { slide: ArchxSlide }) {
+function ArchxClosingSlide({ slide, isRtl = false }: { slide: ArchxSlide; isRtl?: boolean }) {
+  const textDirection = isRtl ? "rtl" : "ltr"
+  const textAlign = isRtl ? "text-right" : "text-left"
+  const manifestoLines = slide.headline.split("\n")
   const manifesto = ["Mais alcance.", "Mais controle.", "Mais confiança institucional."]
 
   return (
@@ -1907,11 +1954,11 @@ function ArchxClosingSlide({ slide }: { slide: ArchxSlide }) {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(223,44,47,0.26),transparent_36%),radial-gradient(circle_at_82%_24%,rgba(223,44,47,0.11),transparent_20%),radial-gradient(circle_at_16%_72%,rgba(223,44,47,0.1),transparent_20%)]" />
         <ClosingNetworkVisual />
 
-        <div className="relative z-10 flex h-full items-center justify-center px-10 py-10 text-center">
+        <div className={cn("relative z-10 flex h-full items-center justify-center px-10 py-10", isRtl ? "text-right" : "text-center")}>
           <div className="max-w-[980px]">
             <div className="mb-5 text-[12px] font-medium uppercase tracking-[0.18em] text-[color:var(--accent-main)]">{slide.eyebrow}</div>
-            <div className="space-y-1">
-              {manifesto.map((line, index) => {
+            <div className={cn("space-y-1", textAlign)} dir={textDirection}>
+              {manifestoLines.map((line, index) => {
                 const [prefix, ...rest] = line.split(" ")
                 return (
                   <h2 key={index} className="font-display text-[4.05rem] font-bold leading-[0.9] tracking-[-0.06em] text-white">

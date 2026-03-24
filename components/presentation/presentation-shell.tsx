@@ -4,6 +4,9 @@ import { useEffect, useRef, useState, type TouchEvent as ReactTouchEvent } from 
 import { AnimatePresence, motion, type PanInfo, type Variants } from "framer-motion"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
+import { defaultLocale, getSlideLabel, localeOptions, type Locale } from "@/content/presentation-i18n"
+import { LanguageSwitcher } from "@/components/presentation/language-switcher"
+import { PresentationLocaleProvider } from "@/components/presentation/presentation-locale-context"
 import { ArchxLogo } from "@/components/presentation/wordmark"
 import { Button } from "@/components/ui/button"
 import type { PresentationSlide } from "@/lib/slides"
@@ -17,11 +20,14 @@ interface PresentationShellProps {
 
 export function PresentationShell({ brandName, slides }: PresentationShellProps) {
   const [currentSlide, setCurrentSlide] = useState(0)
+  const [locale, setLocale] = useState<Locale>(defaultLocale)
   const [direction, setDirection] = useState(1)
   const wheelLockRef = useRef(false)
   const touchStartRef = useRef<number | null>(null)
   const slideParamKey = "slide"
+  const langParamKey = "lang"
   const storageKey = "archx-current-slide"
+  const localeStorageKey = "archx-locale"
 
   const clampSlideIndex = (index: number) => Math.min(slides.length - 1, Math.max(0, index))
 
@@ -40,6 +46,19 @@ export function PresentationShell({ brandName, slides }: PresentationShellProps)
     const storageIndex = fromStorage ? Number.parseInt(fromStorage, 10) - 1 : Number.NaN
     if (Number.isFinite(storageIndex)) {
       setCurrentSlide(clampSlideIndex(storageIndex))
+    }
+
+    const fromQueryLang = params.get(langParamKey)
+    const queryLocale = localeOptions.find((option) => option.value === fromQueryLang)?.value
+    if (queryLocale) {
+      setLocale(queryLocale)
+      return
+    }
+
+    const fromStorageLang = window.localStorage.getItem(localeStorageKey)
+    const storageLocale = localeOptions.find((option) => option.value === fromStorageLang)?.value
+    if (storageLocale) {
+      setLocale(storageLocale)
     }
   }, [slides.length])
 
@@ -88,13 +107,15 @@ export function PresentationShell({ brandName, slides }: PresentationShellProps)
     const oneBasedSlide = String(currentSlide + 1)
     const params = new URLSearchParams(window.location.search)
     params.set(slideParamKey, oneBasedSlide)
+    params.set(langParamKey, locale)
     const nextUrl = `${window.location.pathname}?${params.toString()}${window.location.hash}`
     window.history.replaceState(null, "", nextUrl)
     window.localStorage.setItem(storageKey, oneBasedSlide)
-  }, [currentSlide, slides.length])
+    window.localStorage.setItem(localeStorageKey, locale)
+  }, [currentSlide, locale, slides.length])
 
   const currentSlideData = slides[currentSlide]
-  const contextLabel = currentSlide === 0 ? "Cover" : currentSlideData.title
+  const contextLabel = getSlideLabel(currentSlideData.id, locale)
 
   const slideVariants: Variants = {
     enter: (customDirection: number) => ({
@@ -143,7 +164,8 @@ export function PresentationShell({ brandName, slides }: PresentationShellProps)
   }
 
   return (
-    <div className="viewport-shell">
+    <PresentationLocaleProvider value={{ locale }}>
+      <div className="viewport-shell">
       <div className="background-bleed" />
 
       <div className="pointer-events-none absolute inset-0">
@@ -156,7 +178,7 @@ export function PresentationShell({ brandName, slides }: PresentationShellProps)
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.02),transparent_18%,transparent_82%,rgba(255,255,255,0.02))]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_18%,rgba(223,44,47,0.08),transparent_22%)]" />
 
-        <header className="relative z-10 flex h-[76px] items-center justify-between border-b border-white/10 bg-black/30 px-8 backdrop-blur-sm">
+        <header className="relative z-10 flex h-[76px] items-center justify-between border-b border-white/10 bg-black/30 px-5 md:px-8 backdrop-blur-sm">
           <div className="flex items-center gap-4">
             <ArchxLogo />
             <div className="hidden xl:block">
@@ -164,8 +186,11 @@ export function PresentationShell({ brandName, slides }: PresentationShellProps)
             </div>
           </div>
 
-          <div className="flex items-center gap-6">
-            <div className="hidden items-center gap-3 text-[11px] uppercase tracking-[0.34em] text-[color:var(--muted-text)] md:flex">
+          <div className="flex items-center gap-2 md:gap-3">
+            <div className="shrink-0">
+              <LanguageSwitcher locale={locale} onChange={setLocale} />
+            </div>
+            <div className="hidden items-center gap-3 text-[11px] uppercase tracking-[0.34em] text-[color:var(--muted-text)] xl:flex">
               <span>{brandName}</span>
               <span className="h-1 w-1 rounded-full bg-[color:var(--accent-main)]/80" />
               <span>{contextLabel}</span>
@@ -179,7 +204,7 @@ export function PresentationShell({ brandName, slides }: PresentationShellProps)
         </header>
 
         <main
-          className="relative z-10 h-[calc(100%-152px)] overflow-hidden"
+          className="relative z-10 h-[calc(100%-152px)] overflow-y-auto overflow-x-hidden md:overflow-hidden"
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >
@@ -246,6 +271,7 @@ export function PresentationShell({ brandName, slides }: PresentationShellProps)
           </div>
         </footer>
       </div>
-    </div>
+      </div>
+    </PresentationLocaleProvider>
   )
 }
