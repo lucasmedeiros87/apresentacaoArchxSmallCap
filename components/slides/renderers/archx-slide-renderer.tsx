@@ -65,7 +65,7 @@ export function ArchxSlideRenderer({ slide }: ArchxSlideRendererProps) {
     return <ArchxPaymentRailsSlide slide={slide} />
   }
 
-  if (slide.id === "slide-09-compliance") {
+  if (slide.id === "slide-09-compliance" || slide.id === "slide-02-compliance") {
     return <ArchxComplianceSlide slide={slide} />
   }
 
@@ -85,11 +85,15 @@ export function ArchxSlideRenderer({ slide }: ArchxSlideRendererProps) {
     return <ArchxDifferentialsSlide slide={slide} />
   }
 
-  if (slide.id === "slide-14-commercial-model") {
+  if (slide.id === "slide-03-products") {
+    return <ArchxProductsSlide slide={slide} />
+  }
+
+  if (slide.id === "slide-14-commercial-model" || slide.id === "slide-04-prices") {
     return <ArchxCommercialModelSlide slide={slide} />
   }
 
-  if (slide.id === "slide-15-closing") {
+  if (slide.id === "slide-15-closing" || slide.id === "slide-05-closing") {
     return <ArchxClosingSlide slide={slide} />
   }
 
@@ -1765,6 +1769,69 @@ function ArchxDifferentialsSlide({ slide }: { slide: ArchxSlide }) {
   )
 }
 
+function ArchxProductsSlide({ slide }: { slide: ArchxSlide }) {
+  const groups =
+    slide.groups ?? [
+      { title: "Recebimento local", items: [] },
+      { title: "Câmbio e liquidação", items: [] },
+      { title: "Estrutura e suporte", items: [] },
+    ]
+
+  return (
+    <section className="relative h-full px-8 py-8">
+      <div className="grid h-full grid-cols-12 gap-6">
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
+          className="col-span-12 flex h-full min-h-0 flex-col rounded-[30px] border border-white/8 bg-[linear-gradient(180deg,rgba(0,0,0,0.99),rgba(8,8,8,0.99))] px-10 py-9 lg:col-span-5"
+        >
+          <div className="mb-3 text-[11px] font-medium uppercase tracking-[0.18em] text-[color:var(--accent-main)]">{slide.eyebrow}</div>
+          <h2 className="font-display max-w-[430px] text-[2.66rem] font-bold leading-[0.95] tracking-[-0.05em] text-white">{slide.headline}</h2>
+          <p className="mt-4 max-w-[430px] text-[0.97rem] leading-7 text-white/72">{slide.subheadline}</p>
+          {slide.body ? <p className="mt-3 max-w-[440px] text-[0.88rem] leading-6 text-white/58">{slide.body}</p> : null}
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, x: 22, scale: 0.99 }}
+          animate={{ opacity: 1, x: 0, scale: 1 }}
+          transition={{ duration: 0.46, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
+          className="relative col-span-12 min-h-0 overflow-hidden rounded-[30px] border border-white/8 bg-[linear-gradient(180deg,rgba(4,4,4,0.98),rgba(0,0,0,0.98))] px-6 py-6 lg:col-span-7"
+        >
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.014)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.014)_1px,transparent_1px)] bg-[size:42px_42px]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_24%,rgba(223,44,47,0.1),transparent_28%),radial-gradient(circle_at_24%_76%,rgba(223,44,47,0.08),transparent_24%)]" />
+
+          <div className="relative grid h-full min-h-0 grid-rows-3 gap-4">
+            {groups.map((group, index) => (
+              <motion.div
+                key={group.title}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.08 + index * 0.05, duration: 0.24 }}
+                className="relative overflow-hidden rounded-[22px] border border-white/14 bg-[linear-gradient(135deg,rgba(255,255,255,0.065),rgba(255,255,255,0.035))] px-5 py-4 shadow-[0_14px_28px_rgba(0,0,0,0.24)] backdrop-blur-[9px]"
+              >
+                <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[color:var(--accent-main)]/45 to-transparent" />
+                <div className="mb-2 flex items-center gap-2">
+                  <span className="h-1.5 w-4 rounded-full bg-[color:var(--accent-main)]" />
+                </div>
+                <div className="text-[1.08rem] font-semibold leading-6 text-white">{group.title}</div>
+                <div className="mt-3 space-y-2">
+                  {group.items.map((item) => (
+                    <div key={item} className="flex items-start gap-2.5">
+                      <span className="mt-[0.44rem] h-1 w-1 rounded-full bg-white/45" />
+                      <span className="text-[0.93rem] leading-[1.6] text-white/78">{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
 function ArchxCommercialModelSlide({ slide }: { slide: ArchxSlide }) {
   const rows = slide.bullets.map((item) => {
     const [service, rate] = item.split(" - ")
@@ -1783,14 +1850,14 @@ function ArchxCommercialModelSlide({ slide }: { slide: ArchxSlide }) {
         className="h-full overflow-hidden rounded-[32px] border border-black/8 bg-[linear-gradient(180deg,#f3eee6,#ece6dd)] shadow-[0_20px_60px_rgba(0,0,0,0.08)]"
       >
         <div className="relative grid h-full gap-5 px-9 py-8 lg:grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)]">
-          <div className="flex h-full min-h-0 flex-col pb-8">
+          <div className="flex h-full min-h-0 flex-col pb-4">
             <div className="mb-3 text-[11px] font-medium uppercase tracking-[0.18em] text-[#DF2C2F]">{slide.eyebrow}</div>
             <h2 className="font-display max-w-[480px] text-[2.6rem] font-bold leading-[0.96] tracking-[-0.05em] text-[#111115]">{slide.headline}</h2>
-            <p className="mt-3.5 max-w-[520px] text-[0.98rem] leading-7 text-[#46413b]">{slide.subheadline}</p>
-            {slide.body ? <p className="mt-2.5 max-w-[500px] text-[0.88rem] leading-6 text-[#5b554f]">{slide.body}</p> : null}
+            <p className="mt-3 max-w-[520px] text-[0.98rem] leading-7 text-[#46413b]">{slide.subheadline}</p>
+            {slide.body ? <p className="mt-2 max-w-[500px] text-[0.88rem] leading-6 text-[#5b554f]">{slide.body}</p> : null}
 
             {slide.footerNote ? (
-              <div className="mt-5 max-w-[510px] rounded-[14px] border border-black/14 bg-white/44 px-6 py-2.5 text-[0.8rem] leading-5 text-[#312c27]">
+              <div className="mt-auto max-w-[510px] rounded-[14px] border border-black/18 bg-white/58 px-6 py-3 text-[0.82rem] leading-5 text-[#2c2722] shadow-[0_8px_16px_rgba(0,0,0,0.05)]">
                 {slide.footerNote}
               </div>
             ) : null}
@@ -1803,7 +1870,7 @@ function ArchxCommercialModelSlide({ slide }: { slide: ArchxSlide }) {
             <div className="relative flex h-full min-h-0 flex-col pb-8">
               <div className="rounded-[14px] border border-black/10 bg-white/60 px-4 py-3">
                 <div className="grid grid-cols-[1fr_auto] items-center gap-3">
-                  <div className="text-[0.72rem] font-semibold uppercase tracking-[0.17em] text-[#8a4a4b]">Servico</div>
+                  <div className="text-[0.72rem] font-semibold uppercase tracking-[0.17em] text-[#8a4a4b]">Serviço</div>
                   <div className="text-[0.72rem] font-semibold uppercase tracking-[0.17em] text-[#8a4a4b]">Taxa inicial</div>
                 </div>
                 <div className="mt-2 h-px w-full bg-gradient-to-r from-[#DF2C2F]/70 via-[#DF2C2F]/38 to-transparent" />
@@ -1813,7 +1880,7 @@ function ArchxCommercialModelSlide({ slide }: { slide: ArchxSlide }) {
                 {rows.map((row) => (
                   <div key={row.service} className="grid grid-cols-[1fr_auto] items-center gap-3 border-b border-black/9 py-3.5 last:border-b-0">
                     <div className="text-[0.95rem] font-medium leading-6 text-[#17161a]">{row.service}</div>
-                    <div className="font-display text-[1.08rem] font-bold tracking-[-0.01em] text-[#0f0f12]">{row.rate}</div>
+                    <div className="font-display text-[1.12rem] font-bold tracking-[-0.01em] text-[#0f0f12]">{row.rate}</div>
                   </div>
                 ))}
               </div>
