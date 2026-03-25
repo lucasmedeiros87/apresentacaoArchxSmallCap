@@ -105,20 +105,9 @@
   }
 
   @media (max-width: 1024px) {
-    body {
-      overflow: auto;
-    }
-
-    .viewport-shell {
-      overflow: auto;
-    }
-
     .slide-stage {
-      position: relative;
-      inset: auto;
-      margin: 0;
       width: 100vw;
-      height: 100vh;
+      height: 100dvh;
       max-height: none;
       aspect-ratio: auto;
       border-radius: 0;

@@ -207,33 +207,33 @@ function ArchxCoverHero({ slide, isRtl = false }: { slide: ArchxSlide; isRtl?: b
   const textAlign = isRtl ? "text-right" : "text-left"
 
   return (
-    <section className="relative h-full px-8 py-8">
+    <section className="relative h-full px-3 py-3 sm:px-5 sm:py-5 lg:px-8 lg:py-8">
       <div className="grid h-full grid-cols-12 gap-6">
         <motion.div
           initial={{ opacity: 0, y: 22 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
           className={cn(
-            "col-span-12 flex h-full flex-col justify-center rounded-[30px] border border-white/8 bg-[linear-gradient(180deg,rgba(0,0,0,0.98),rgba(7,7,7,0.98))] px-12 py-12 lg:col-span-7",
+            "col-span-12 flex h-full flex-col justify-center rounded-[24px] border border-white/8 bg-[linear-gradient(180deg,rgba(0,0,0,0.98),rgba(7,7,7,0.98))] px-4 py-4 sm:px-7 sm:py-7 lg:col-span-7 lg:rounded-[30px] lg:px-12 lg:py-12",
             textAlign,
           )}
           dir={textDirection}
         >
           <div className="max-w-[680px]">
-            <div className="mb-6 text-[12px] font-medium uppercase tracking-[0.18em] text-[color:var(--accent-main)]">{slide.eyebrow}</div>
-            <h2 className="font-display max-w-[620px] text-[4.3rem] font-bold leading-[0.94] tracking-[-0.06em] text-white xl:text-[4.45rem]">
+            <div className="mb-3 text-[10px] font-medium uppercase tracking-[0.16em] text-[color:var(--accent-main)] sm:mb-4 sm:text-[11px] lg:mb-6 lg:text-[12px] lg:tracking-[0.18em]">{slide.eyebrow}</div>
+            <h2 className="font-display max-w-[620px] text-[1.9rem] font-bold leading-[0.96] tracking-[-0.04em] text-white sm:text-[2.4rem] md:text-[2.8rem] lg:text-[4.3rem] lg:leading-[0.94] lg:tracking-[-0.06em] xl:text-[4.45rem]">
               {slide.headline}
             </h2>
-            <p className="mt-8 max-w-[560px] text-[1.26rem] leading-8 text-white/66">{slide.subheadline}</p>
+            <p className="mt-4 max-w-[560px] text-[0.9rem] leading-6 text-white/72 sm:text-[0.98rem] sm:leading-7 md:text-[1.03rem] lg:mt-8 lg:text-[1.26rem] lg:leading-8 lg:text-white/66">{slide.subheadline}</p>
 
-            <div className="mt-10 flex flex-wrap gap-2.5">
+            <div className="mt-4 flex flex-wrap gap-1.5 sm:mt-6 sm:gap-2 lg:mt-10 lg:gap-2.5">
               {slide.bullets.map((bullet, index) => (
                 <motion.div
                   key={bullet}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.08 + index * 0.05, duration: 0.28 }}
-                  className="rounded-full border border-white/8 bg-white/[0.02] px-3.5 py-1.5 text-[0.82rem] text-white/70 shadow-[0_0_40px_rgba(223,44,47,0.03)] backdrop-blur-sm"
+                  className="rounded-full border border-white/8 bg-white/[0.02] px-2.5 py-1 text-[0.7rem] text-white/72 shadow-[0_0_40px_rgba(223,44,47,0.03)] backdrop-blur-sm sm:px-3 sm:py-1.5 sm:text-[0.78rem] lg:px-3.5 lg:py-1.5 lg:text-[0.82rem]"
                 >
                   {bullet}
                 </motion.div>
@@ -246,7 +246,7 @@ function ArchxCoverHero({ slide, isRtl = false }: { slide: ArchxSlide; isRtl?: b
           initial={{ opacity: 0, x: 24, scale: 0.99 }}
           animate={{ opacity: 1, x: 0, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.06, ease: [0.22, 1, 0.36, 1] }}
-          className="relative col-span-12 hidden overflow-hidden rounded-[30px] border border-white/8 bg-[linear-gradient(180deg,rgba(4,4,4,0.98),rgba(0,0,0,0.98))] lg:col-span-5 lg:block"
+          className="relative col-span-12 hidden overflow-hidden rounded-[24px] border border-white/8 bg-[linear-gradient(180deg,rgba(4,4,4,0.98),rgba(0,0,0,0.98))] lg:col-span-5 lg:block lg:rounded-[30px]"
         >
           <ArchxHeroGlobe />
         </motion.div>
@@ -276,7 +276,7 @@ function ArchxWhoWeAreSlide({ slide }: { slide: ArchxSlide }) {
   ]
 
   return (
-    <section className="relative h-full px-8 py-8">
+    <section className="relative h-full px-3 py-3 sm:px-5 sm:py-5 lg:px-8 lg:py-8">
       <motion.div
         initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
@@ -331,7 +331,7 @@ function ArchxWhoWeAreSlide({ slide }: { slide: ArchxSlide }) {
 
 function ArchxProblemSlide({ slide }: { slide: ArchxSlide }) {
   return (
-    <section className="relative h-full px-8 py-8">
+    <section className="relative h-full px-3 py-3 sm:px-5 sm:py-5 lg:px-8 lg:py-8">
       <div className="grid h-full grid-cols-12 gap-6">
         <motion.div
           initial={{ opacity: 0, y: 18 }}
@@ -419,7 +419,7 @@ function ArchxSolutionArchitectureSlide({ slide }: { slide: ArchxSlide }) {
   ]
 
   return (
-    <section className="relative h-full px-8 py-8">
+    <section className="relative h-full px-3 py-3 sm:px-5 sm:py-5 lg:px-8 lg:py-8">
       <div className="grid h-full grid-cols-12 gap-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -848,7 +848,7 @@ function ArchxSolutionArchitectureSlideV2({ slide }: { slide: ArchxSlide }) {
   ]
 
   return (
-    <section className="relative h-full px-8 py-8">
+    <section className="relative h-full px-3 py-3 sm:px-5 sm:py-5 lg:px-8 lg:py-8">
       <div className="grid h-full grid-cols-12 gap-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -1350,34 +1350,34 @@ function ArchxComplianceSlide({ slide, isRtl = false }: { slide: ArchxSlide; isR
   const textAlign = isRtl ? "text-right" : "text-left"
 
   const controlNodes = [
-    { title: "KYC / KYB", className: "left-[9%] top-[18%]" },
-    { title: "AML / CFT", className: "right-[9%] top-[20%]" },
-    { title: "LGPD / GDPR", className: "left-[12%] bottom-[16%]" },
-    { title: "Audit & Reporting", className: "right-[6%] bottom-[24%]" },
-    { title: "Regulatory Structures", className: "left-[56%] bottom-[8%]" },
+    { title: "KYC / KYB", className: "left-[8%] top-[14%] sm:left-[9%] sm:top-[18%]" },
+    { title: "AML / CFT", className: "right-[8%] top-[16%] sm:right-[9%] sm:top-[20%]" },
+    { title: "LGPD / GDPR", className: "left-[9%] bottom-[24%] sm:left-[12%] sm:bottom-[16%]" },
+    { title: "Audit & Reporting", className: "right-[7%] bottom-[26%] sm:right-[6%] sm:bottom-[24%]" },
+    { title: "Regulatory Structures", className: "left-1/2 -translate-x-1/2 bottom-[8%] sm:left-[56%] sm:translate-x-0 sm:bottom-[8%]" },
   ]
 
   return (
-    <section className="relative h-full px-8 py-8">
-      <div className="grid h-full grid-cols-12 gap-6">
+    <section className="relative h-full px-3 py-3 sm:px-5 sm:py-5 lg:px-8 lg:py-8">
+      <div className="grid h-full grid-cols-12 gap-3 sm:gap-4 lg:gap-6">
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
           className={cn(
-            "col-span-12 flex h-full flex-col overflow-hidden rounded-[30px] border border-white/8 bg-[linear-gradient(180deg,rgba(0,0,0,0.985),rgba(8,8,8,0.985))] px-10 py-9 lg:col-span-5",
+            "col-span-12 flex min-h-0 flex-col overflow-hidden rounded-[20px] border border-white/8 bg-[linear-gradient(180deg,rgba(0,0,0,0.985),rgba(8,8,8,0.985))] px-3 py-3 sm:px-5 sm:py-5 lg:col-span-5 lg:h-full lg:rounded-[30px] lg:px-10 lg:py-9",
             textAlign,
           )}
           dir={textDirection}
         >
           <div className="max-w-[420px]">
-            <div className="mb-5 text-[12px] font-medium uppercase tracking-[0.18em] text-[color:var(--accent-main)]">{slide.eyebrow}</div>
-            <h2 className="font-display max-w-[360px] text-[2.62rem] font-bold leading-[0.98] tracking-[-0.06em] text-white">{slide.headline}</h2>
-            <p className="mt-4 max-w-[400px] text-[0.95rem] leading-7 text-white/68">{slide.subheadline}</p>
-            {slide.body ? <p className="mt-4 max-w-[410px] text-[0.86rem] leading-6 text-white/52">{slide.body}</p> : null}
+            <div className="mb-3 text-[10px] font-medium uppercase tracking-[0.16em] text-[color:var(--accent-main)] sm:text-[11px] lg:mb-5 lg:text-[12px] lg:tracking-[0.18em]">{slide.eyebrow}</div>
+            <h2 className="font-display max-w-[360px] text-[1.55rem] font-bold leading-[1] tracking-[-0.03em] text-white sm:text-[1.9rem] lg:text-[2.62rem] lg:tracking-[-0.06em]">{slide.headline}</h2>
+            <p className="mt-3 max-w-[400px] text-[0.82rem] leading-6 text-white/74 sm:text-[0.9rem] lg:mt-4 lg:text-[0.95rem] lg:leading-7 lg:text-white/68">{slide.subheadline}</p>
+            {slide.body ? <p className="mt-2.5 hidden max-w-[410px] text-[0.76rem] leading-5 text-white/62 sm:block sm:text-[0.82rem] sm:leading-6 lg:mt-4 lg:text-[0.86rem] lg:text-white/52">{slide.body}</p> : null}
           </div>
 
-          <div className="mt-5 grid grid-cols-2 gap-2.5">
+          <div className="mt-3 grid grid-cols-2 gap-1.5 sm:gap-2 lg:mt-5 lg:gap-2.5">
             {slide.bullets.map((item, index) => (
               <motion.div
                 key={item}
@@ -1385,7 +1385,7 @@ function ArchxComplianceSlide({ slide, isRtl = false }: { slide: ArchxSlide; isR
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.08 + index * 0.04, duration: 0.24 }}
                 className={cn(
-                  "rounded-[16px] border border-white/12 bg-white/[0.04] px-4 py-2.5 text-[0.82rem] leading-5 text-white/84 backdrop-blur-[6px]",
+                  "rounded-[14px] border border-white/12 bg-white/[0.04] px-3 py-2 text-[0.72rem] leading-4 text-white/84 backdrop-blur-[6px] sm:text-[0.78rem] sm:leading-5 lg:rounded-[16px] lg:px-4 lg:py-2.5 lg:text-[0.82rem]",
                   index === 4 ? "col-span-2" : "",
                 )}
               >
@@ -1398,7 +1398,7 @@ function ArchxComplianceSlide({ slide, isRtl = false }: { slide: ArchxSlide; isR
           </div>
 
           {slide.closingLine ? (
-            <div className="mt-4 rounded-[16px] border border-[color:var(--accent-main)]/14 bg-[color:var(--accent-main)]/[0.05] px-4 py-2.5 text-[0.8rem] leading-5 text-white/74">
+            <div className="mt-2 rounded-[14px] border border-[color:var(--accent-main)]/14 bg-[color:var(--accent-main)]/[0.05] px-3 py-2 text-[0.7rem] leading-4 text-white/78 sm:text-[0.78rem] sm:leading-5 lg:mt-4 lg:rounded-[16px] lg:px-4 lg:py-2.5 lg:text-[0.8rem] lg:text-white/74">
               {slide.closingLine}
             </div>
           ) : null}
@@ -1408,13 +1408,13 @@ function ArchxComplianceSlide({ slide, isRtl = false }: { slide: ArchxSlide; isR
           initial={{ opacity: 0, x: 24, scale: 0.99 }}
           animate={{ opacity: 1, x: 0, scale: 1 }}
           transition={{ duration: 0.48, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
-          className="relative col-span-12 overflow-hidden rounded-[30px] border border-white/8 bg-[linear-gradient(180deg,rgba(4,4,4,0.98),rgba(0,0,0,0.98))] lg:col-span-7"
+          className="relative col-span-12 min-h-[190px] overflow-hidden rounded-[20px] border border-white/8 bg-[linear-gradient(180deg,rgba(4,4,4,0.98),rgba(0,0,0,0.98))] sm:min-h-[220px] lg:col-span-7 lg:min-h-0 lg:rounded-[30px]"
         >
           <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.014)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.014)_1px,transparent_1px)] bg-[size:44px_44px]" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_52%_48%,rgba(223,44,47,0.12),transparent_20%),radial-gradient(circle_at_78%_26%,rgba(223,44,47,0.06),transparent_16%)]" />
-          <div className="absolute inset-[26px] rounded-[24px] border border-white/6 bg-[linear-gradient(180deg,rgba(255,255,255,0.012),rgba(255,255,255,0.004))]" />
+          <div className="absolute inset-[12px] rounded-[16px] border border-white/6 bg-[linear-gradient(180deg,rgba(255,255,255,0.012),rgba(255,255,255,0.004))] sm:inset-[18px] lg:inset-[26px] lg:rounded-[24px]" />
 
-          <div className="absolute inset-[34px]">
+          <div className="absolute inset-[16px] sm:inset-[24px] lg:inset-[34px]">
             <svg className="absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
               <path d="M49 48 C 38 37, 28 30, 20 24" stroke="rgba(255,255,255,0.18)" strokeWidth="0.22" fill="none" />
               <path d="M52 48 C 64 40, 73 34, 84 28" stroke="rgba(255,255,255,0.18)" strokeWidth="0.22" fill="none" />
@@ -1425,12 +1425,12 @@ function ArchxComplianceSlide({ slide, isRtl = false }: { slide: ArchxSlide; isR
 
             <div className="absolute left-1/2 top-[48%] z-10 -translate-x-1/2 -translate-y-1/2">
               <div className="absolute left-1/2 top-1/2 h-48 w-48 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,_rgba(223,44,47,0.16),_transparent_72%)] blur-3xl" />
-              <div className="relative flex h-[8.5rem] w-[8.5rem] items-center justify-center rounded-full border border-[color:var(--accent-main)]/40 bg-[linear-gradient(180deg,rgba(20,20,20,0.99),rgba(6,6,6,0.99))] shadow-[0_0_0_1px_rgba(255,255,255,0.055),0_20px_40px_rgba(0,0,0,0.35)]">
+              <div className="relative flex h-[6.2rem] w-[6.2rem] items-center justify-center rounded-full border border-[color:var(--accent-main)]/40 bg-[linear-gradient(180deg,rgba(20,20,20,0.99),rgba(6,6,6,0.99))] shadow-[0_0_0_1px_rgba(255,255,255,0.055),0_20px_40px_rgba(0,0,0,0.35)] sm:h-[7rem] sm:w-[7rem] lg:h-[8.5rem] lg:w-[8.5rem]">
                 <div className="text-center">
-                  <div className="text-[11px] font-medium uppercase tracking-[0.18em] text-[color:var(--accent-main)]">Core</div>
-                  <div className="mt-1.5 font-display text-[0.9rem] font-semibold leading-4 tracking-[0.09em] text-white">
+                  <div className="text-[9px] font-medium uppercase tracking-[0.16em] text-[color:var(--accent-main)] sm:text-[10px] lg:text-[11px] lg:tracking-[0.18em]">Core</div>
+                  <div className="mt-1 font-display text-[0.72rem] font-semibold leading-3 tracking-[0.08em] text-white sm:text-[0.8rem] sm:leading-4 lg:mt-1.5 lg:text-[0.9rem] lg:tracking-[0.09em]">
                     <div>ARCHX</div>
-                    <div className="text-[0.68rem] tracking-[0.13em] text-white/84">CONTROL LAYER</div>
+                    <div className="text-[0.54rem] tracking-[0.1em] text-white/84 sm:text-[0.58rem] lg:text-[0.68rem] lg:tracking-[0.13em]">CONTROL LAYER</div>
                   </div>
                 </div>
               </div>
@@ -1443,13 +1443,20 @@ function ArchxComplianceSlide({ slide, isRtl = false }: { slide: ArchxSlide; isR
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.08 + index * 0.05, duration: 0.24 }}
                 className={cn(
-                  "absolute rounded-[16px] border border-white/10 bg-white/[0.05] px-3.5 py-2.5 shadow-[0_10px_20px_rgba(0,0,0,0.22)] backdrop-blur-[8px]",
+                  "absolute rounded-[12px] border border-white/10 bg-white/[0.05] px-2.5 py-1.5 shadow-[0_10px_20px_rgba(0,0,0,0.22)] backdrop-blur-[8px] sm:px-3 sm:py-2 lg:rounded-[16px] lg:px-3.5 lg:py-2.5",
                   node.className,
                 )}
               >
                 <div className="flex items-center gap-2">
                   <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--accent-main)]" />
-                  <span className="text-[0.78rem] font-medium leading-5 text-white/85">{node.title}</span>
+                  <span
+                    className={cn(
+                      "text-[0.62rem] font-medium leading-4 text-white/85 sm:text-[0.7rem] lg:text-[0.78rem] lg:leading-5",
+                      index === 4 ? "text-[0.56rem] sm:text-[0.66rem] lg:text-[0.74rem]" : "",
+                    )}
+                  >
+                    {node.title}
+                  </span>
                 </div>
               </motion.div>
             ))}
@@ -1822,45 +1829,45 @@ function ArchxProductsSlide({ slide, isRtl = false }: { slide: ArchxSlide; isRtl
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
           className={cn(
-            "col-span-12 flex h-full min-h-0 flex-col rounded-[30px] border border-white/8 bg-[linear-gradient(180deg,rgba(0,0,0,0.99),rgba(8,8,8,0.99))] px-10 py-9 lg:col-span-5",
+            "col-span-12 flex h-full min-h-0 flex-col rounded-[24px] border border-white/8 bg-[linear-gradient(180deg,rgba(0,0,0,0.99),rgba(8,8,8,0.99))] px-4 py-4 sm:px-7 sm:py-6 lg:col-span-5 lg:rounded-[30px] lg:px-10 lg:py-9",
             textAlign,
           )}
           dir={textDirection}
         >
-          <div className="mb-3 text-[11px] font-medium uppercase tracking-[0.18em] text-[color:var(--accent-main)]">{slide.eyebrow}</div>
-          <h2 className="font-display max-w-[430px] text-[2.66rem] font-bold leading-[0.95] tracking-[-0.05em] text-white">{slide.headline}</h2>
-          <p className="mt-4 max-w-[430px] text-[0.97rem] leading-7 text-white/72">{slide.subheadline}</p>
-          {slide.body ? <p className="mt-3 max-w-[440px] text-[0.88rem] leading-6 text-white/58">{slide.body}</p> : null}
+          <div className="mb-2.5 text-[10px] font-medium uppercase tracking-[0.16em] text-[color:var(--accent-main)] sm:text-[11px] lg:mb-3 lg:tracking-[0.18em]">{slide.eyebrow}</div>
+          <h2 className="font-display max-w-[430px] text-[1.6rem] font-bold leading-[1] tracking-[-0.03em] text-white sm:text-[2rem] lg:text-[2.66rem] lg:leading-[0.95] lg:tracking-[-0.05em]">{slide.headline}</h2>
+          <p className="mt-3 max-w-[430px] text-[0.82rem] leading-6 text-white/74 sm:text-[0.9rem] lg:mt-4 lg:text-[0.97rem] lg:leading-7 lg:text-white/72">{slide.subheadline}</p>
+          {slide.body ? <p className="mt-2 max-w-[440px] text-[0.75rem] leading-5 text-white/62 sm:text-[0.82rem] sm:leading-6 lg:mt-3 lg:text-[0.88rem] lg:text-white/58">{slide.body}</p> : null}
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, x: 22, scale: 0.99 }}
           animate={{ opacity: 1, x: 0, scale: 1 }}
           transition={{ duration: 0.46, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
-          className="relative col-span-12 min-h-0 overflow-hidden rounded-[30px] border border-white/8 bg-[linear-gradient(180deg,rgba(4,4,4,0.98),rgba(0,0,0,0.98))] px-6 py-6 lg:col-span-7"
+          className="relative col-span-12 min-h-0 overflow-hidden rounded-[24px] border border-white/8 bg-[linear-gradient(180deg,rgba(4,4,4,0.98),rgba(0,0,0,0.98))] px-3 py-3 sm:px-4 sm:py-4 lg:col-span-7 lg:rounded-[30px] lg:px-6 lg:py-6"
         >
           <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.014)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.014)_1px,transparent_1px)] bg-[size:42px_42px]" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_24%,rgba(223,44,47,0.1),transparent_28%),radial-gradient(circle_at_24%_76%,rgba(223,44,47,0.08),transparent_24%)]" />
 
-          <div className="relative grid h-full min-h-0 grid-rows-3 gap-4">
+          <div className="relative grid h-full min-h-0 grid-rows-3 gap-2.5 sm:gap-3 lg:gap-4">
             {groups.map((group, index) => (
               <motion.div
                 key={group.title}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.08 + index * 0.05, duration: 0.24 }}
-                className="relative overflow-hidden rounded-[22px] border border-white/14 bg-[linear-gradient(135deg,rgba(255,255,255,0.065),rgba(255,255,255,0.035))] px-5 py-4 shadow-[0_14px_28px_rgba(0,0,0,0.24)] backdrop-blur-[9px]"
+                className="relative overflow-hidden rounded-[16px] border border-white/14 bg-[linear-gradient(135deg,rgba(255,255,255,0.065),rgba(255,255,255,0.035))] px-3 py-2.5 shadow-[0_14px_28px_rgba(0,0,0,0.24)] backdrop-blur-[9px] sm:px-4 sm:py-3 lg:rounded-[22px] lg:px-5 lg:py-4"
               >
                 <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[color:var(--accent-main)]/45 to-transparent" />
                 <div className="mb-2 flex items-center gap-2">
                   <span className="h-1.5 w-4 rounded-full bg-[color:var(--accent-main)]" />
                 </div>
-                <div className="text-[1.08rem] font-semibold leading-6 text-white">{group.title}</div>
-                <div className="mt-3 space-y-2">
+                <div className="text-[0.9rem] font-semibold leading-5 text-white sm:text-[0.98rem] lg:text-[1.08rem] lg:leading-6">{group.title}</div>
+                <div className="mt-2 space-y-1.5 sm:space-y-2 lg:mt-3">
                   {group.items.map((item) => (
                     <div key={item} className="flex items-start gap-2.5">
                       <span className="mt-[0.44rem] h-1 w-1 rounded-full bg-white/45" />
-                      <span className="text-[0.93rem] leading-[1.6] text-white/78">{item}</span>
+                      <span className="text-[0.74rem] leading-[1.45] text-white/80 sm:text-[0.82rem] lg:text-[0.93rem] lg:leading-[1.6] lg:text-white/78">{item}</span>
                     </div>
                   ))}
                 </div>
@@ -1886,45 +1893,45 @@ function ArchxCommercialModelSlide({ slide, isRtl = false }: { slide: ArchxSlide
   })
 
   return (
-    <section className="relative h-full px-8 py-8">
+    <section className="relative h-full px-3 py-3 sm:px-5 sm:py-5 lg:px-8 lg:py-8">
       <motion.div
         initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
-        className="h-full overflow-hidden rounded-[32px] border border-black/8 bg-[linear-gradient(180deg,#f3eee6,#ece6dd)] shadow-[0_20px_60px_rgba(0,0,0,0.08)]"
+        className="h-full overflow-hidden rounded-[24px] border border-black/8 bg-[linear-gradient(180deg,#f3eee6,#ece6dd)] shadow-[0_20px_60px_rgba(0,0,0,0.08)] lg:rounded-[32px]"
       >
-        <div className="relative grid h-full gap-5 px-9 py-8 lg:grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)]">
+        <div className="relative grid h-full gap-2.5 px-3 py-3 sm:gap-3 sm:px-4 sm:py-4 lg:grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)] lg:gap-5 lg:px-9 lg:py-8">
           <div className={cn("flex h-full min-h-0 flex-col pb-4", textAlign)} dir={textDirection}>
-            <div className="mb-3 text-[11px] font-medium uppercase tracking-[0.18em] text-[#DF2C2F]">{slide.eyebrow}</div>
-            <h2 className="font-display max-w-[480px] text-[2.6rem] font-bold leading-[0.96] tracking-[-0.05em] text-[#111115]">{slide.headline}</h2>
-            <p className="mt-3 max-w-[520px] text-[0.98rem] leading-7 text-[#46413b]">{slide.subheadline}</p>
-            {slide.body ? <p className="mt-2 max-w-[500px] text-[0.88rem] leading-6 text-[#5b554f]">{slide.body}</p> : null}
+            <div className="mb-2 text-[10px] font-medium uppercase tracking-[0.16em] text-[#DF2C2F] sm:text-[11px] lg:mb-3 lg:tracking-[0.18em]">{slide.eyebrow}</div>
+            <h2 className="font-display max-w-[480px] text-[1.58rem] font-bold leading-[1] tracking-[-0.03em] text-[#111115] sm:text-[1.95rem] lg:text-[2.6rem] lg:leading-[0.96] lg:tracking-[-0.05em]">{slide.headline}</h2>
+            <p className="mt-2.5 max-w-[520px] text-[0.8rem] leading-5 text-[#46413b] sm:text-[0.86rem] sm:leading-6 lg:mt-3 lg:text-[0.98rem] lg:leading-7">{slide.subheadline}</p>
+            {slide.body ? <p className="mt-1.5 max-w-[500px] text-[0.72rem] leading-5 text-[#5b554f] sm:text-[0.78rem] sm:leading-5 lg:mt-2 lg:text-[0.88rem] lg:leading-6">{slide.body}</p> : null}
 
             {slide.footerNote ? (
-              <div className="mt-auto max-w-[510px] rounded-[14px] border border-black/18 bg-white/58 px-6 py-3 text-[0.82rem] leading-5 text-[#2c2722] shadow-[0_8px_16px_rgba(0,0,0,0.05)]">
+              <div className="mt-2 max-w-[510px] rounded-[12px] border border-black/18 bg-white/58 px-3 py-2 text-[0.68rem] leading-4 text-[#2c2722] shadow-[0_8px_16px_rgba(0,0,0,0.05)] sm:mt-2.5 sm:px-4 sm:py-2.5 sm:text-[0.74rem] sm:leading-5 lg:mt-auto lg:rounded-[14px] lg:px-6 lg:py-3 lg:text-[0.82rem]">
                 {slide.footerNote}
               </div>
             ) : null}
           </div>
 
-          <div className="relative h-full min-h-0 rounded-[26px] border border-black/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.8),rgba(248,242,234,0.76))] p-5">
+          <div className="relative h-full min-h-0 rounded-[16px] border border-black/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.8),rgba(248,242,234,0.76))] p-2.5 sm:p-3 lg:rounded-[26px] lg:p-5">
             <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.024)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.024)_1px,transparent_1px)] bg-[size:40px_40px]" />
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_76%_22%,rgba(223,44,47,0.08),transparent_28%)]" />
 
             <div className="relative flex h-full min-h-0 flex-col pb-8">
-              <div className="rounded-[14px] border border-black/10 bg-white/60 px-4 py-3">
+              <div className="rounded-[12px] border border-black/10 bg-white/60 px-2.5 py-1.5 sm:px-3 sm:py-2 lg:rounded-[14px] lg:px-4 lg:py-3">
                 <div className="grid grid-cols-[1fr_auto] items-center gap-3">
-                  <div className="text-[0.72rem] font-semibold uppercase tracking-[0.17em] text-[#8a4a4b]">Serviço</div>
-                  <div className="text-[0.72rem] font-semibold uppercase tracking-[0.17em] text-[#8a4a4b]">Taxa inicial</div>
+                  <div className="text-[0.58rem] font-semibold uppercase tracking-[0.14em] text-[#8a4a4b] sm:text-[0.62rem] lg:text-[0.72rem] lg:tracking-[0.17em]">Serviço</div>
+                  <div className="text-[0.58rem] font-semibold uppercase tracking-[0.14em] text-[#8a4a4b] sm:text-[0.62rem] lg:text-[0.72rem] lg:tracking-[0.17em]">Taxa inicial</div>
                 </div>
                 <div className="mt-2 h-px w-full bg-gradient-to-r from-[#DF2C2F]/70 via-[#DF2C2F]/38 to-transparent" />
               </div>
 
-              <div className="mt-2.5 flex-1 rounded-[14px] border border-black/10 bg-white/48 px-4 py-1.5">
+              <div className="mt-1.5 flex-1 rounded-[12px] border border-black/10 bg-white/48 px-2.5 py-1 sm:px-3 sm:py-1.5 lg:mt-2.5 lg:rounded-[14px] lg:px-4">
                 {rows.map((row) => (
-                  <div key={row.service} className="grid grid-cols-[1fr_auto] items-center gap-3 border-b border-black/9 py-3.5 last:border-b-0">
-                    <div className="text-[0.95rem] font-medium leading-6 text-[#17161a]">{row.service}</div>
-                    <div className="font-display text-[1.12rem] font-bold tracking-[-0.01em] text-[#0f0f12]">{row.rate}</div>
+                  <div key={row.service} className="grid grid-cols-[1fr_auto] items-center gap-2 border-b border-black/9 py-1.5 sm:py-2 last:border-b-0 lg:gap-3 lg:py-3.5">
+                    <div className="text-[0.72rem] font-medium leading-5 text-[#17161a] sm:text-[0.8rem] lg:text-[0.95rem] lg:leading-6">{row.service}</div>
+                    <div className="font-display text-[0.84rem] font-bold tracking-[-0.01em] text-[#0f0f12] sm:text-[0.95rem] lg:text-[1.12rem]">{row.rate}</div>
                   </div>
                 ))}
               </div>
@@ -1940,38 +1947,37 @@ function ArchxClosingSlide({ slide, isRtl = false }: { slide: ArchxSlide; isRtl?
   const textDirection = isRtl ? "rtl" : "ltr"
   const textAlign = isRtl ? "text-right" : "text-left"
   const manifestoLines = slide.headline.split("\n")
-  const manifesto = ["Mais alcance.", "Mais controle.", "Mais confiança institucional."]
 
   return (
-    <section className="relative h-full px-8 py-8">
+    <section className="relative h-full px-3 py-3 sm:px-5 sm:py-5 lg:px-8 lg:py-8">
       <motion.div
         initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.46, ease: [0.22, 1, 0.36, 1] }}
-        className="relative h-full overflow-hidden rounded-[32px] border border-white/8 bg-[linear-gradient(180deg,rgba(0,0,0,0.995),rgba(7,7,7,0.995))]"
+        className="relative h-full overflow-hidden rounded-[24px] border border-white/8 bg-[linear-gradient(180deg,rgba(0,0,0,0.995),rgba(7,7,7,0.995))] lg:rounded-[32px]"
       >
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.014)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.014)_1px,transparent_1px)] bg-[size:46px_46px]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(223,44,47,0.26),transparent_36%),radial-gradient(circle_at_82%_24%,rgba(223,44,47,0.11),transparent_20%),radial-gradient(circle_at_16%_72%,rgba(223,44,47,0.1),transparent_20%)]" />
         <ClosingNetworkVisual />
 
-        <div className={cn("relative z-10 flex h-full items-center justify-center px-10 py-10", isRtl ? "text-right" : "text-center")}>
+        <div className={cn("relative z-10 flex h-full items-center justify-center px-4 py-4 sm:px-6 sm:py-6 lg:px-10 lg:py-10", isRtl ? "text-right" : "text-center")}>
           <div className="max-w-[980px]">
-            <div className="mb-5 text-[12px] font-medium uppercase tracking-[0.18em] text-[color:var(--accent-main)]">{slide.eyebrow}</div>
+            <div className="mb-2 text-[10px] font-medium uppercase tracking-[0.16em] text-[color:var(--accent-main)] sm:text-[11px] lg:mb-5 lg:text-[12px] lg:tracking-[0.18em]">{slide.eyebrow}</div>
             <div className={cn("space-y-1", textAlign)} dir={textDirection}>
               {manifestoLines.map((line, index) => {
                 const [prefix, ...rest] = line.split(" ")
                 return (
-                  <h2 key={index} className="font-display text-[4.05rem] font-bold leading-[0.9] tracking-[-0.06em] text-white">
+                  <h2 key={index} className="font-display text-[1.5rem] font-bold leading-[0.95] tracking-[-0.03em] text-white sm:text-[1.9rem] lg:text-[4.05rem] lg:leading-[0.9] lg:tracking-[-0.06em]">
                     <span>{prefix} </span>
                     <span className="text-[color:var(--accent-main)]">{rest.join(" ")}</span>
                   </h2>
                 )
               })}
             </div>
-            <p className="mx-auto mt-7 max-w-[790px] text-[1.02rem] leading-8 text-white/74">{slide.subheadline}</p>
+            <p className="mx-auto mt-3 max-w-[790px] text-[0.8rem] leading-6 text-white/78 sm:text-[0.9rem] lg:mt-7 lg:text-[1.02rem] lg:leading-8 lg:text-white/74">{slide.subheadline}</p>
 
             {slide.cta ? (
-              <div className="mt-8 inline-flex items-center gap-2 border-b border-[color:var(--accent-main)]/60 pb-1.5 text-[0.95rem] font-medium text-white">
+              <div className="mt-4 inline-flex items-center gap-2 border-b border-[color:var(--accent-main)]/60 pb-1 text-[0.78rem] font-medium text-white sm:text-[0.84rem] lg:mt-8 lg:pb-1.5 lg:text-[0.95rem]">
                 <span>{slide.cta.title}</span>
                 <ArrowRight className="h-4 w-4 text-[color:var(--accent-main)]" />
               </div>

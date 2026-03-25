@@ -178,15 +178,17 @@ export function PresentationShell({ brandName, slides }: PresentationShellProps)
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.02),transparent_18%,transparent_82%,rgba(255,255,255,0.02))]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_18%,rgba(223,44,47,0.08),transparent_22%)]" />
 
-        <header className="relative z-10 flex h-[76px] items-center justify-between border-b border-white/10 bg-black/30 px-5 md:px-8 backdrop-blur-sm">
-          <div className="flex items-center gap-4">
-            <ArchxLogo />
+        <header className="relative z-10 flex h-[62px] items-center justify-between border-b border-white/10 bg-black/30 px-3 sm:px-4 md:h-[76px] md:px-8 backdrop-blur-sm">
+          <div className="flex items-center gap-2 md:gap-4">
+            <div className="origin-left scale-[0.84] sm:scale-[0.9] md:scale-100">
+              <ArchxLogo />
+            </div>
             <div className="hidden xl:block">
               <div className="text-[11px] uppercase tracking-[0.36em] text-[color:var(--muted-text)]">Capital, Technology, Private Banking</div>
             </div>
           </div>
 
-          <div className="flex items-center gap-2 md:gap-3">
+          <div className="flex items-center gap-1.5 sm:gap-2 md:gap-3">
             <div className="shrink-0">
               <LanguageSwitcher locale={locale} onChange={setLocale} />
             </div>
@@ -195,7 +197,7 @@ export function PresentationShell({ brandName, slides }: PresentationShellProps)
               <span className="h-1 w-1 rounded-full bg-[color:var(--accent-main)]/80" />
               <span>{contextLabel}</span>
             </div>
-            <div className="font-display text-lg font-semibold tabular-nums text-[color:var(--primary-text)]">
+            <div className="font-display text-base font-semibold tabular-nums text-[color:var(--primary-text)] md:text-lg">
               {String(currentSlide + 1).padStart(2, "0")}
               <span className="px-2 text-[color:var(--muted-text)]">/</span>
               <span className="text-[color:var(--secondary-text)]">{String(slides.length).padStart(2, "0")}</span>
@@ -204,7 +206,7 @@ export function PresentationShell({ brandName, slides }: PresentationShellProps)
         </header>
 
         <main
-          className="relative z-10 h-[calc(100%-152px)] overflow-y-auto overflow-x-hidden md:overflow-hidden"
+          className="relative z-10 h-[calc(100%-124px)] overflow-hidden md:h-[calc(100%-152px)]"
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >
@@ -227,13 +229,13 @@ export function PresentationShell({ brandName, slides }: PresentationShellProps)
           </AnimatePresence>
         </main>
 
-        <footer className="relative z-10 flex h-[76px] items-center justify-between border-t border-white/10 bg-black/30 px-8 backdrop-blur-sm">
+        <footer className="relative z-10 flex h-[62px] items-center justify-between border-t border-white/10 bg-black/30 px-3 sm:px-4 md:h-[76px] md:px-8 backdrop-blur-sm">
           <div className="flex items-center gap-3">
             <Button
               variant="ghost"
               onClick={prevSlide}
               disabled={currentSlide === 0}
-              className="h-10 rounded-full border border-white/10 bg-white/[0.02] px-4 text-[color:var(--secondary-text)] hover:bg-white/[0.06] hover:text-[color:var(--accent-main)]"
+              className="h-9 rounded-full border border-white/10 bg-white/[0.02] px-3 text-[color:var(--secondary-text)] hover:bg-white/[0.06] hover:text-[color:var(--accent-main)] md:h-10 md:px-4"
             >
               <ChevronLeft className="h-4 w-4" />
             </Button>
@@ -241,13 +243,13 @@ export function PresentationShell({ brandName, slides }: PresentationShellProps)
               variant="ghost"
               onClick={nextSlide}
               disabled={currentSlide === slides.length - 1}
-              className="h-10 rounded-full border border-white/10 bg-white/[0.02] px-4 text-[color:var(--secondary-text)] hover:bg-white/[0.06] hover:text-[color:var(--accent-main)]"
+              className="h-9 rounded-full border border-white/10 bg-white/[0.02] px-3 text-[color:var(--secondary-text)] hover:bg-white/[0.06] hover:text-[color:var(--accent-main)] md:h-10 md:px-4"
             >
               <ChevronRight className="h-4 w-4" />
             </Button>
           </div>
 
-          <div className="flex min-w-[260px] items-center gap-3">
+          <div className="flex min-w-[150px] items-center gap-2 sm:min-w-[190px] md:min-w-[260px] md:gap-3">
             <div className="h-px flex-1 overflow-hidden rounded-full bg-white/8">
               <motion.div
                 className="h-full bg-[linear-gradient(90deg,rgba(223,44,47,0.15),rgba(223,44,47,1))]"
@@ -255,7 +257,7 @@ export function PresentationShell({ brandName, slides }: PresentationShellProps)
                 transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
               />
             </div>
-            <div className="flex items-center gap-2">
+            <div className="hidden items-center gap-2 sm:flex">
               {slides.map((slide, index) => (
                 <button
                   key={slide.id}
