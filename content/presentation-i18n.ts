@@ -212,7 +212,7 @@ const slideTranslations: SlideTranslationMap = {
         "Commercial terms vary according to operational structure, transactional profile and regulatory complexity.",
       bullets: [
         "PIX collection - 0.4%",
-        "Card machine - 2% to 1.5%",
+        "Card machine - 2%",
         "BRL -> USDT - 0.68% to 0.65%",
         "USDT -> USD - 1.5% to 0.8%",
         "Consulting - to be defined",
@@ -228,7 +228,7 @@ const slideTranslations: SlideTranslationMap = {
         "As condições comerciais variam conforme a estrutura da operação, o perfil transacional e o nível de complexidade regulatória envolvido.",
       bullets: [
         "Coleta PIX - 0,4%",
-        "Maquininha de cartão - 2% a 1,5%",
+        "Maquininha de cartão - 2%",
         "BRL -> USDT - 0,68% a 0,65%",
         "USDT -> USD - 1,5% a 0,8%",
         "Consultoria - a combinar",
@@ -244,7 +244,7 @@ const slideTranslations: SlideTranslationMap = {
         "Условия зависят от структуры операции, транзакционного профиля и регуляторной сложности.",
       bullets: [
         "Сбор через PIX - 0,4%",
-        "Терминал карт - 2% до 1,5%",
+        "Терминал карт - 2%",
         "BRL -> USDT - 0,68% до 0,65%",
         "USDT -> USD - 1,5% до 0,8%",
         "Консалтинг - по договоренности",
@@ -260,7 +260,7 @@ const slideTranslations: SlideTranslationMap = {
         "تختلف الشروط التجارية حسب هيكل العملية والملف المعاملاتي ومستوى التعقيد التنظيمي.",
       bullets: [
         "تحصيل PIX - 0,4%",
-        "ماكينة البطاقات - 2% إلى 1,5%",
+        "ماكينة البطاقات - 2%",
         "BRL -> USDT - 0,68% إلى 0,65%",
         "USDT -> USD - 1,5% إلى 0,8%",
         "استشارات - حسب الاتفاق",
