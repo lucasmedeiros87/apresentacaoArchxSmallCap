@@ -16,11 +16,22 @@ import { isBrowser } from "@/utils/client-utils"
 interface PresentationShellProps {
   brandName: string
   slides: PresentationSlide[]
+  initialLocale?: Locale
+  progressCaption?: string
+  showLanguageSwitcher?: boolean
+  lockLocale?: boolean
 }
 
-export function PresentationShell({ brandName, slides }: PresentationShellProps) {
+export function PresentationShell({
+  brandName,
+  slides,
+  initialLocale = defaultLocale,
+  progressCaption,
+  showLanguageSwitcher = true,
+  lockLocale = false,
+}: PresentationShellProps) {
   const [currentSlide, setCurrentSlide] = useState(0)
-  const [locale, setLocale] = useState<Locale>(defaultLocale)
+  const [locale, setLocale] = useState<Locale>(initialLocale)
   const [direction, setDirection] = useState(1)
   const wheelLockRef = useRef(false)
   const touchStartRef = useRef<number | null>(null)
@@ -39,28 +50,28 @@ export function PresentationShell({ brandName, slides }: PresentationShellProps)
     const queryIndex = fromQuery ? Number.parseInt(fromQuery, 10) - 1 : Number.NaN
     if (Number.isFinite(queryIndex)) {
       setCurrentSlide(clampSlideIndex(queryIndex))
-      return
+    } else {
+      const fromStorage = window.localStorage.getItem(storageKey)
+      const storageIndex = fromStorage ? Number.parseInt(fromStorage, 10) - 1 : Number.NaN
+      if (Number.isFinite(storageIndex)) {
+        setCurrentSlide(clampSlideIndex(storageIndex))
+      }
     }
 
-    const fromStorage = window.localStorage.getItem(storageKey)
-    const storageIndex = fromStorage ? Number.parseInt(fromStorage, 10) - 1 : Number.NaN
-    if (Number.isFinite(storageIndex)) {
-      setCurrentSlide(clampSlideIndex(storageIndex))
+    if (!lockLocale) {
+      const fromQueryLang = params.get(langParamKey)
+      const queryLocale = localeOptions.find((option) => option.value === fromQueryLang)?.value
+      if (queryLocale) {
+        setLocale(queryLocale)
+      } else {
+        const fromStorageLang = window.localStorage.getItem(localeStorageKey)
+        const storageLocale = localeOptions.find((option) => option.value === fromStorageLang)?.value
+        if (storageLocale) {
+          setLocale(storageLocale)
+        }
+      }
     }
-
-    const fromQueryLang = params.get(langParamKey)
-    const queryLocale = localeOptions.find((option) => option.value === fromQueryLang)?.value
-    if (queryLocale) {
-      setLocale(queryLocale)
-      return
-    }
-
-    const fromStorageLang = window.localStorage.getItem(localeStorageKey)
-    const storageLocale = localeOptions.find((option) => option.value === fromStorageLang)?.value
-    if (storageLocale) {
-      setLocale(storageLocale)
-    }
-  }, [slides.length])
+  }, [initialLocale, lockLocale, slides.length])
 
   const updateSlide = (nextIndex: number) => {
     if (nextIndex === currentSlide || nextIndex < 0 || nextIndex >= slides.length) return
@@ -107,12 +118,18 @@ export function PresentationShell({ brandName, slides }: PresentationShellProps)
     const oneBasedSlide = String(currentSlide + 1)
     const params = new URLSearchParams(window.location.search)
     params.set(slideParamKey, oneBasedSlide)
-    params.set(langParamKey, locale)
+    if (lockLocale) {
+      params.delete(langParamKey)
+    } else {
+      params.set(langParamKey, locale)
+    }
     const nextUrl = `${window.location.pathname}?${params.toString()}${window.location.hash}`
     window.history.replaceState(null, "", nextUrl)
     window.localStorage.setItem(storageKey, oneBasedSlide)
-    window.localStorage.setItem(localeStorageKey, locale)
-  }, [currentSlide, locale, slides.length])
+    if (!lockLocale) {
+      window.localStorage.setItem(localeStorageKey, locale)
+    }
+  }, [currentSlide, locale, lockLocale, slides.length])
 
   const currentSlideData = slides[currentSlide]
   const contextLabel = getSlideLabel(currentSlideData.id, locale)
@@ -189,9 +206,11 @@ export function PresentationShell({ brandName, slides }: PresentationShellProps)
           </div>
 
           <div className="flex items-center gap-1.5 sm:gap-2 md:gap-3">
-            <div className="shrink-0">
-              <LanguageSwitcher locale={locale} onChange={setLocale} />
-            </div>
+            {showLanguageSwitcher ? (
+              <div className="shrink-0">
+                <LanguageSwitcher locale={locale} onChange={setLocale} />
+              </div>
+            ) : null}
             <div className="hidden items-center gap-3 text-[11px] uppercase tracking-[0.34em] text-[color:var(--muted-text)] xl:flex">
               <span>{brandName}</span>
               <span className="h-1 w-1 rounded-full bg-[color:var(--accent-main)]/80" />
@@ -250,6 +269,11 @@ export function PresentationShell({ brandName, slides }: PresentationShellProps)
           </div>
 
           <div className="flex min-w-[150px] items-center gap-2 sm:min-w-[190px] md:min-w-[260px] md:gap-3">
+            {progressCaption ? (
+              <div className="hidden whitespace-nowrap text-[10px] uppercase tracking-[0.14em] text-[color:var(--muted-text)] lg:block">
+                {progressCaption}
+              </div>
+            ) : null}
             <div className="h-px flex-1 overflow-hidden rounded-full bg-white/8">
               <motion.div
                 className="h-full bg-[linear-gradient(90deg,rgba(223,44,47,0.15),rgba(223,44,47,1))]"

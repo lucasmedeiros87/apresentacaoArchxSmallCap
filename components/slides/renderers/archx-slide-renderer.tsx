@@ -35,6 +35,7 @@ export function ArchxSlideRenderer({ slide }: ArchxSlideRendererProps) {
   const { locale } = usePresentationLocale()
   const isRtl = isRtlLocale(locale)
   const translated = getSlideTranslation(slide.id, locale)
+  const localeOverride = slide.localeOverrides?.[locale]
   const localizedSlide: ArchxSlide = translated
     ? {
         ...slide,
@@ -49,12 +50,21 @@ export function ArchxSlideRenderer({ slide }: ArchxSlideRendererProps) {
         cta: translated.cta ?? slide.cta,
       }
     : slide
+  const finalSlide: ArchxSlide = localeOverride
+    ? {
+        ...localizedSlide,
+        ...localeOverride,
+        bullets: localeOverride.bullets ?? localizedSlide.bullets,
+        groups: localeOverride.groups ?? localizedSlide.groups,
+        cta: localeOverride.cta ?? localizedSlide.cta,
+      }
+    : localizedSlide
 
-  const theme = themeClasses[localizedSlide.theme]
-  const isLight = localizedSlide.theme === "dark-minimal"
+  const theme = themeClasses[finalSlide.theme]
+  const isLight = finalSlide.theme === "dark-minimal"
 
-  if (localizedSlide.id === "slide-01-cover") {
-    return <ArchxCoverHero slide={localizedSlide} isRtl={isRtl} />
+  if (finalSlide.id === "slide-01-cover") {
+    return <ArchxCoverHero slide={finalSlide} isRtl={isRtl} />
   }
 
   if (slide.id === "slide-02-who-we-are") {
@@ -85,8 +95,8 @@ export function ArchxSlideRenderer({ slide }: ArchxSlideRendererProps) {
     return <ArchxPaymentRailsSlide slide={slide} />
   }
 
-  if (localizedSlide.id === "slide-09-compliance" || localizedSlide.id === "slide-02-compliance") {
-    return <ArchxComplianceSlide slide={localizedSlide} isRtl={isRtl} />
+  if (finalSlide.id === "slide-09-compliance" || finalSlide.id === "slide-02-compliance") {
+    return <ArchxComplianceSlide slide={finalSlide} isRtl={isRtl} />
   }
 
   if (slide.id === "slide-10-global-presence") {
@@ -105,24 +115,24 @@ export function ArchxSlideRenderer({ slide }: ArchxSlideRendererProps) {
     return <ArchxDifferentialsSlide slide={slide} />
   }
 
-  if (localizedSlide.id === "slide-03-products") {
-    return <ArchxProductsSlide slide={localizedSlide} isRtl={isRtl} />
+  if (finalSlide.id === "slide-03-products") {
+    return <ArchxProductsSlide slide={finalSlide} isRtl={isRtl} />
   }
 
-  if (localizedSlide.id === "slide-14-commercial-model" || localizedSlide.id === "slide-04-prices") {
-    return <ArchxCommercialModelSlide slide={localizedSlide} isRtl={isRtl} />
+  if (finalSlide.id === "slide-14-commercial-model" || finalSlide.id === "slide-04-prices") {
+    return <ArchxCommercialModelSlide slide={finalSlide} isRtl={isRtl} />
   }
 
-  if (localizedSlide.id === "slide-15-closing" || localizedSlide.id === "slide-05-closing") {
-    return <ArchxClosingSlide slide={localizedSlide} isRtl={isRtl} />
+  if (finalSlide.id === "slide-15-closing" || finalSlide.id === "slide-05-closing") {
+    return <ArchxClosingSlide slide={finalSlide} isRtl={isRtl} />
   }
 
   return (
     <SlideSurface
-      eyebrow={localizedSlide.eyebrow}
-      title={localizedSlide.headline}
-      description={localizedSlide.subheadline}
-      media={<VisualPanel slide={localizedSlide} />}
+      eyebrow={finalSlide.eyebrow}
+      title={finalSlide.headline}
+      description={finalSlide.subheadline}
+      media={<VisualPanel slide={finalSlide} />}
       tone={isLight ? "light" : "dark"}
       contentClassName={theme.content}
       mediaClassName={theme.media}
@@ -132,19 +142,19 @@ export function ArchxSlideRenderer({ slide }: ArchxSlideRendererProps) {
           <div className="flex flex-wrap items-center gap-3">
             <StatusBadge status={slide.status} />
             <div className="text-[11px] uppercase tracking-[0.32em] text-[color:var(--muted-text)]">
-              {localizedSlide.visualType}
+              {finalSlide.visualType}
             </div>
           </div>
 
-          {localizedSlide.body ? (
+          {finalSlide.body ? (
             <p className={cn("max-w-3xl text-base leading-7", isLight ? "text-[color:var(--page-dark-muted)]" : "text-[color:var(--secondary-text)]")}>
-              {localizedSlide.body}
+              {finalSlide.body}
             </p>
           ) : null}
 
-          <BulletBlock slide={localizedSlide} />
+          <BulletBlock slide={finalSlide} />
 
-          {localizedSlide.closingLine ? (
+          {finalSlide.closingLine ? (
             <div
               className={cn(
                 "rounded-[18px] border px-4 py-4 text-sm leading-6",
@@ -153,7 +163,7 @@ export function ArchxSlideRenderer({ slide }: ArchxSlideRendererProps) {
                   : "border-white/7 bg-white/[0.03] text-[color:var(--primary-text)]",
               )}
             >
-              {localizedSlide.closingLine}
+              {finalSlide.closingLine}
             </div>
           ) : null}
         </div>
@@ -165,20 +175,20 @@ export function ArchxSlideRenderer({ slide }: ArchxSlideRendererProps) {
             <MetaCard light={slide.theme === "dark-minimal"} label="Motion" value={slide.visualNotes.motionHint ?? "Subtle panel transition"} />
           </div>
 
-          {localizedSlide.footerNote ? (
+          {finalSlide.footerNote ? (
             <div
               className={cn(
                 "rounded-[18px] border px-4 py-3 text-sm leading-6",
-                localizedSlide.theme === "dark-minimal"
+                finalSlide.theme === "dark-minimal"
                   ? "border-black/8 bg-black/[0.02] text-[color:var(--page-dark-muted)]"
                   : "border-white/7 bg-white/[0.03] text-[color:var(--secondary-text)]",
               )}
             >
-              {localizedSlide.footerNote}
+              {finalSlide.footerNote}
             </div>
           ) : null}
 
-          {localizedSlide.cta ? (
+          {finalSlide.cta ? (
             <div
               className={cn(
                 "rounded-[22px] border px-5 py-5",
@@ -189,10 +199,10 @@ export function ArchxSlideRenderer({ slide }: ArchxSlideRendererProps) {
             >
               <div className="text-[11px] uppercase tracking-[0.32em] text-[color:var(--accent-main)]">CTA</div>
               <div className={cn("mt-2 text-lg font-semibold", isLight ? "text-[color:var(--page-dark-text)]" : "text-[color:var(--primary-text)]")}>
-                {localizedSlide.cta.title}
+                {finalSlide.cta.title}
               </div>
               <div className={cn("mt-1 text-sm leading-6", isLight ? "text-[color:var(--page-dark-muted)]" : "text-[color:var(--secondary-text)]")}>
-                {localizedSlide.cta.text}
+                {finalSlide.cta.text}
               </div>
             </div>
           ) : null}
@@ -205,6 +215,7 @@ export function ArchxSlideRenderer({ slide }: ArchxSlideRendererProps) {
 function ArchxCoverHero({ slide, isRtl = false }: { slide: ArchxSlide; isRtl?: boolean }) {
   const textDirection = isRtl ? "rtl" : "ltr"
   const textAlign = isRtl ? "text-right" : "text-left"
+  const hasProposalClient = Boolean(slide.proposalClientName)
 
   return (
     <section className="relative h-full px-3 py-3 sm:px-5 sm:py-5 lg:px-8 lg:py-8">
@@ -214,7 +225,8 @@ function ArchxCoverHero({ slide, isRtl = false }: { slide: ArchxSlide; isRtl?: b
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
           className={cn(
-            "col-span-12 flex h-full flex-col justify-center rounded-[24px] border border-white/8 bg-[linear-gradient(180deg,rgba(0,0,0,0.98),rgba(7,7,7,0.98))] px-4 py-4 sm:px-7 sm:py-7 lg:col-span-7 lg:rounded-[30px] lg:px-12 lg:py-12",
+            "col-span-12 flex h-full flex-col rounded-[24px] border border-white/8 bg-[linear-gradient(180deg,rgba(0,0,0,0.98),rgba(7,7,7,0.98))] px-4 py-4 sm:px-7 sm:py-7 lg:col-span-7 lg:rounded-[30px] lg:px-12 lg:py-12",
+            hasProposalClient ? "justify-between" : "justify-center",
             textAlign,
           )}
           dir={textDirection}
@@ -240,6 +252,12 @@ function ArchxCoverHero({ slide, isRtl = false }: { slide: ArchxSlide; isRtl?: b
               ))}
             </div>
           </div>
+
+          {slide.proposalClientName ? (
+            <div className="mt-4 border-t border-white/10 pt-3 text-[10px] uppercase tracking-[0.16em] text-white/72 sm:text-[11px] lg:mt-8 lg:pt-4">
+              Cliente: <span className="text-white/92">{slide.proposalClientName}</span>
+            </div>
+          ) : null}
         </motion.div>
 
         <motion.div
@@ -1849,25 +1867,42 @@ function ArchxProductsSlide({ slide, isRtl = false }: { slide: ArchxSlide; isRtl
           <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.014)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.014)_1px,transparent_1px)] bg-[size:42px_42px]" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_24%,rgba(223,44,47,0.1),transparent_28%),radial-gradient(circle_at_24%_76%,rgba(223,44,47,0.08),transparent_24%)]" />
 
-          <div className="relative grid h-full min-h-0 grid-rows-3 gap-2.5 sm:gap-3 lg:gap-4">
+          <div className="relative grid h-full min-h-0 grid-rows-3 gap-2.5 sm:gap-3 lg:grid-rows-[1.5fr_0.9fr_0.75fr] lg:gap-3.5">
             {groups.map((group, index) => (
               <motion.div
                 key={group.title}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.08 + index * 0.05, duration: 0.24 }}
-                className="relative overflow-hidden rounded-[16px] border border-white/14 bg-[linear-gradient(135deg,rgba(255,255,255,0.065),rgba(255,255,255,0.035))] px-3 py-2.5 shadow-[0_14px_28px_rgba(0,0,0,0.24)] backdrop-blur-[9px] sm:px-4 sm:py-3 lg:rounded-[22px] lg:px-5 lg:py-4"
+                className={cn(
+                  "relative overflow-hidden rounded-[16px] border border-white/14 bg-[linear-gradient(135deg,rgba(255,255,255,0.065),rgba(255,255,255,0.035))] shadow-[0_14px_28px_rgba(0,0,0,0.24)] backdrop-blur-[9px] lg:rounded-[22px] lg:px-5",
+                  index === 0 ? "px-3 py-2.5 sm:px-4 sm:py-3 lg:py-4.5" : "px-3 py-2 sm:px-4 sm:py-2.5 lg:py-3",
+                )}
               >
                 <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[color:var(--accent-main)]/45 to-transparent" />
                 <div className="mb-2 flex items-center gap-2">
                   <span className="h-1.5 w-4 rounded-full bg-[color:var(--accent-main)]" />
                 </div>
-                <div className="text-[0.9rem] font-semibold leading-5 text-white sm:text-[0.98rem] lg:text-[1.08rem] lg:leading-6">{group.title}</div>
-                <div className="mt-2 space-y-1.5 sm:space-y-2 lg:mt-3">
+                <div
+                  className={cn(
+                    "font-semibold text-white",
+                    index === 0 ? "text-[0.92rem] leading-5 sm:text-[1rem] lg:text-[1.1rem] lg:leading-6" : "text-[0.88rem] leading-5 sm:text-[0.95rem] lg:text-[1.02rem] lg:leading-5.5",
+                  )}
+                >
+                  {group.title}
+                </div>
+                <div className={cn("mt-2", index === 0 ? "space-y-1.5 sm:space-y-2 lg:mt-3" : "space-y-1.5 sm:space-y-1.5 lg:mt-2.5")}>
                   {group.items.map((item) => (
                     <div key={item} className="flex items-start gap-2.5">
                       <span className="mt-[0.44rem] h-1 w-1 rounded-full bg-white/45" />
-                      <span className="text-[0.74rem] leading-[1.45] text-white/80 sm:text-[0.82rem] lg:text-[0.93rem] lg:leading-[1.6] lg:text-white/78">{item}</span>
+                      <span
+                        className={cn(
+                          "leading-[1.45] text-white/80 sm:text-[0.82rem] lg:text-white/78",
+                          index === 0 ? "text-[0.74rem] lg:text-[0.93rem] lg:leading-[1.6]" : "text-[0.72rem] lg:text-[0.86rem] lg:leading-[1.5]",
+                        )}
+                      >
+                        {item}
+                      </span>
                     </div>
                   ))}
                 </div>

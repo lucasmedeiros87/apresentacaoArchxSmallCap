@@ -9,6 +9,7 @@ export type SlideVisualType =
   | "editorial"
 
 export type SlideContentStatus = "official-site" | "proposed-offering" | "hybrid"
+export type SupportedLocale = "en" | "pt-BR" | "ar" | "ru"
 
 export type ArchxSlide = {
   id: string
@@ -38,4 +39,11 @@ export type ArchxSlide = {
     motionHint?: string
   }
   footerNote?: string
+  proposalClientName?: string
+  localeOverrides?: Partial<
+    Record<
+      SupportedLocale,
+      Partial<Pick<ArchxSlide, "eyebrow" | "headline" | "subheadline" | "body" | "closingLine" | "footerNote" | "bullets" | "groups" | "cta">>
+    >
+  >
 }
