@@ -6,10 +6,8 @@ export const archxSlides: ArchxSlide[] = [
     order: 1,
     eyebrow: "ARCHX CAPITAL",
     headline: "Infraestrutura Financeira Global",
-    subheadline:
-      "Pagamentos, liquidez, compliance e estrutura financeira para operações com alcance internacional.",
-    body:
-      "A Archx atua com estrutura financeira internacional voltada a operações que exigem eficiência operacional, segurança regulatória e capacidade global.",
+    subheadline: "Pagamentos, liquidez, compliance e estrutura financeira para operações com alcance internacional.",
+    body: "A Archx atua com estrutura financeira internacional voltada a operações que exigem eficiência operacional, segurança regulatória e capacidade global.",
     bullets: ["Pagamentos globais", "Liquidez", "Compliance", "Estrutura financeira internacional"],
     speakerNotes: "Abertura institucional com foco em alcance global e execução financeira com padrão premium.",
     visualType: "hero",
@@ -27,10 +25,8 @@ export const archxSlides: ArchxSlide[] = [
     order: 2,
     eyebrow: "COMPLIANCE",
     headline: "Compliance como base da operação",
-    subheadline:
-      "Governança, monitoramento e adequação regulatória como parte central da estrutura operacional.",
-    body:
-      "A atuação da Archx considera compliance, auditoria e estrutura regulatória como parte da operação, garantindo mais segurança, governança e confiabilidade institucional.",
+    subheadline: "Governança, monitoramento e adequação regulatória como parte central da estrutura operacional.",
+    body: "A atuação da Archx considera compliance, auditoria e estrutura regulatória como parte da operação, garantindo mais segurança, governança e confiabilidade institucional.",
     bullets: ["Governança", "Auditoria", "Estrutura regulatória", "Segurança operacional"],
     closingLine: "Compliance como infraestrutura para escalar com controle e confiança institucional.",
     speakerNotes: "Versão curta do pilar de compliance com mensagem objetiva e institucional.",
@@ -49,10 +45,8 @@ export const archxSlides: ArchxSlide[] = [
     order: 3,
     eyebrow: "PRODUTOS",
     headline: "Produtos e serviços",
-    subheadline:
-      "Uma oferta objetiva para recebimento, pagamentos, câmbio em USDT e suporte financeiro global.",
-    body:
-      "Soluções organizadas para operação local, liquidação internacional e suporte financeiro de maior complexidade.",
+    subheadline: "Uma oferta objetiva para recebimento, pagamentos, câmbio em USDT e suporte financeiro global.",
+    body: "Soluções organizadas para operação local, liquidação internacional e suporte financeiro de maior complexidade.",
     bullets: [],
     groups: [
       {
@@ -61,6 +55,8 @@ export const archxSlides: ArchxSlide[] = [
           "Coleta de PIX",
           "Maquininha de cartão de crédito",
           "Pagamento online via cartão de crédito / checkout",
+          "Cartão de crédito e débito local e internacional",
+          "Conta bancária Brasil e USA",
         ],
       },
       {
@@ -84,19 +80,193 @@ export const archxSlides: ArchxSlide[] = [
     },
   },
   {
-    id: "slide-04-prices",
+    id: "slide-04-api-implementation",
     order: 4,
+    eyebrow: "IMPLANTAÇÃO API",
+    headline: "Implantação API",
+    subheadline: "Condições de setup e mensalidade mínima estruturadas para início de operação com previsibilidade comercial.",
+    body: "Condições iniciais organizadas por camada de serviço, com foco em setup de entrada e regra simples de cobrança recorrente.",
+    bullets: [],
+    groups: [
+      {
+        title: "Access Fee (Setup)",
+        items: ["Banking as a Service|R$ 45.000,00|R$ 20.000,00", "Crypto as a Service|R$ 15.000,00|R$ 10.000,00"],
+      },
+      {
+        title: "Mensalidade mínima",
+        items: ["Mensalidade mínima|R$ 2.000,00", "Início da cobrança|A partir do mês 2"],
+      },
+      {
+        title: "Observações contratuais",
+        items: [
+          "* Mensalidade mínima de R$ 2.000,00 cobrada a partir do mês 2.",
+          "Setup faturado após assinatura, com vencimento em até 10 dias.",
+          "Período de contrato: 3 anos.",
+        ],
+      },
+    ],
+    speakerNotes: "Estrutura de entrada comercial e contratação, sem aparência de planilha crua.",
+    visualType: "table",
+    theme: "dark-accent",
+    status: "proposed-offering",
+    visualNotes: {
+      layout: "esquerda editorial e direita em blocos tabulares premium",
+      emphasis: "valores atuais e condição de mensalidade mínima",
+      mediaHint: "linhas sutis e diferenciação entre valor antigo e atual",
+      motionHint: "entrada em cascata dos blocos",
+    },
+  },
+  {
+    id: "slide-05-baas",
+    order: 5,
+    eyebrow: "BANKING AS A SERVICE",
+    headline: "BaaS",
+    subheadline: "Tarifas operacionais por tipo de serviço, com escala por volume e regras de cobrança bem definidas.",
+    body: "Framework de pricing para contas, KYC, PIX, antifraude e P2P, organizado para leitura executiva e comparação rápida.",
+    bullets: [],
+    groups: [
+      {
+        title: "Contas abertas PF / PJ",
+        items: ["Conta ativa*|R$ 0,90", "Conta inativa|R$ 0,25"],
+      },
+      {
+        title: "KYC PF** / KYC PJ**",
+        items: ["KYC PF|R$ 5,00", "KYC PJ|R$ 15,50", "Por solicitação"],
+      },
+      {
+        title: "PIX (Cash-in e Cash-out)",
+        items: [
+          "0 - 25.000|R$ 0,30",
+          "25.001 - 50.000|R$ 0,28",
+          "50.001 - 100.000|R$ 0,26",
+          "100.001 - 250.000|R$ 0,24",
+          "250.001 - 500.000|R$ 0,22",
+          "A partir de 500.001|R$ 0,21",
+        ],
+      },
+      {
+        title: "Antifraude transacional",
+        items: ["Por transação|R$ 0,03"],
+      },
+      {
+        title: "P2P",
+        items: ["Por transação|Isento"],
+      },
+    ],
+    closingLine: "* Considera-se conta ativa aquelas que transacionaram nos últimos 30 dias. ** Cobrança de KYC como revalidação de dados a cada 12 meses dos clientes ativos.",
+    speakerNotes: "Slide de framework operacional BaaS com foco institucional e leitura clara.",
+    visualType: "table",
+    theme: "dark-accent",
+    status: "proposed-offering",
+    visualNotes: {
+      layout: "esquerda narrativa e direita modular por blocos de serviço",
+      emphasis: "escala PIX e tarifas unitárias",
+      mediaHint: "cards tabulares escuros com divisórias discretas",
+      motionHint: "reveal por grupo",
+    },
+  },
+  {
+    id: "slide-06-boleto-payments",
+    order: 6,
+    eyebrow: "BANKING AS A SERVICE",
+    headline: "Boleto e pagamento",
+    subheadline: "Condições de boleto e pagamento de contas organizadas em estrutura objetiva para proposta comercial.",
+    body: "Do ciclo de boleto à liquidação de contas, os serviços são apresentados com clareza de cobrança e remuneração.",
+    bullets: [],
+    groups: [
+      {
+        title: "Boleto",
+        items: ["Emissão|Isento", "Liquidação|R$ 1,60", "Baixa|R$ 0,55", "Devolução|R$ 2,20"],
+      },
+      {
+        title: "Pagamento de conta",
+        items: ["Ficha de compensação|R$ 0,18 (é remunerado)", "Utilities e Tributos|Não remuneramos"],
+      },
+    ],
+    speakerNotes: "Consolidação das camadas de boleto e pagamento de contas em visual premium.",
+    visualType: "table",
+    theme: "dark-accent",
+    status: "proposed-offering",
+    visualNotes: {
+      layout: "esquerda contextualiza e direita com dois blocos tabulares",
+      emphasis: "itens isentos e itens remunerados",
+      mediaHint: "blocos escuros com contraste controlado",
+      motionHint: "entrada por blocos principais",
+    },
+  },
+  {
+    id: "slide-07-crypto-caas",
+    order: 7,
+    eyebrow: "CRYPTO AS A SERVICE",
+    headline: "Liquidity",
+    subheadline: "Conversão — Fiat para crypto",
+    body: "Cotação do dólar spot (B3).",
+    bullets: [],
+    groups: [
+      {
+        title: "Crypto as a Service",
+        items: ["BRL → USDT|0,4%", "USDT → USD|0,4%"],
+      },
+    ],
+    speakerNotes: "Slide de liquidez com taxas fixas, sem tier, mantendo leitura premium.",
+    visualType: "table",
+    theme: "dark-accent",
+    status: "proposed-offering",
+    visualNotes: {
+      layout: "esquerda editorial com headline forte e direita em card tabular único",
+      emphasis: "taxas fixas de conversão",
+      mediaHint: "card escuro com bastante respiro e alinhamento preciso",
+      motionHint: "entrada limpa do bloco único",
+    },
+  },
+  {
+    id: "slide-08-commercial-policy",
+    order: 8,
+    eyebrow: "POLÍTICA COMERCIAL",
+    headline: "Política Comercial",
+    subheadline: "Condições operacionais e de faturamento para entrada, carência e início de cobrança.",
+    body: "Regras objetivas para setup, go-live e faturamento recorrente da operação.",
+    bullets: [],
+    groups: [
+      {
+        title: "Pagamento de setup",
+        items: [
+          "Após assinatura do contrato, o setup será faturado com vencimento em até 10 dias.",
+          "Caso não seja pago, não será possível receber as credenciais de produção.",
+        ],
+      },
+      {
+        title: "Prazo para entrada em produção e início das cobranças",
+        items: [
+          "O início da cobrança das tarifas (mínimo de franquia, mensalidades, transacionais, etc.) terá carência conforme negociado em cada produto e independe da entrada em produção do parceiro.",
+        ],
+      },
+    ],
+    closingLine:
+      "O faturamento será emitido no 5º dia útil do mês subsequente à assinatura, e o valor correspondente será debitado automaticamente da conta do cliente até o dia 20 de cada mês.",
+    speakerNotes: "Ponte final entre pricing operacional e encerramento institucional.",
+    visualType: "cards",
+    theme: "dark-accent",
+    status: "proposed-offering",
+    visualNotes: {
+      layout: "headline no topo com dois cards principais e bloco horizontal inferior",
+      emphasis: "clareza de regras comerciais",
+      mediaHint: "cards escuros premium com bordas sutis",
+      motionHint: "reveal progressivo dos três blocos",
+    },
+  },
+  {
+    id: "slide-07-prices",
+    order: 9,
     eyebrow: "PREÇOS",
     headline: "Modelo comercial",
-    subheadline:
-      "Tarifas organizadas de forma objetiva para apresentação institucional e proposta comercial inicial.",
-    body:
-      "As condições comerciais variam conforme a estrutura da operação, o perfil transacional e o nível de complexidade regulatória envolvido.",
+    subheadline: "Tarifas organizadas de forma objetiva para apresentação institucional e proposta comercial inicial.",
+    body: "As condições comerciais variam conforme a estrutura da operação, o perfil transacional e o nível de complexidade regulatória envolvido.",
     bullets: [
       "Coleta PIX - 0,4%",
-      "Maquininha de cartão - 1,5% a 1,8%",
-      "BRL → USDT - 0,65% a 0,68%",
-      "USDT → USD - 0,36% a 0,5%",
+      "Maquininha de cartão - 2%",
+      "BRL -> USDT - padrão 0,5% | 0,4% acima de 20MM BRL/mês",
+      "USDT -> USD - padrão 0,5% | 0,4% acima de 5MM USD/mês",
       "Consultoria - a combinar",
     ],
     footerNote: "Tarifas podem variar por perfil operacional, volume e estrutura da operação.",
@@ -112,12 +282,11 @@ export const archxSlides: ArchxSlide[] = [
     },
   },
   {
-    id: "slide-05-closing",
-    order: 5,
+    id: "slide-08-closing",
+    order: 10,
     eyebrow: "ENCERRAMENTO",
     headline: "Mais alcance.\nMais controle.\nMais confiança institucional.",
-    subheadline:
-      "Pagamentos, liquidez, compliance e estrutura financeira para operações que exigem alcance internacional.",
+    subheadline: "Pagamentos, liquidez, compliance e estrutura financeira para operações que exigem alcance internacional.",
     bullets: [],
     cta: {
       title: "Fale com a Archx",

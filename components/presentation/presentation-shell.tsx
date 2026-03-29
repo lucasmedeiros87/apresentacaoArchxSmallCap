@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, type TouchEvent as ReactTouchEvent } from 
 import { AnimatePresence, motion, type PanInfo, type Variants } from "framer-motion"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
+import { orderDeckItemsByLocale } from "@/content/presentation-deck-order"
 import { defaultLocale, getSlideLabel, localeOptions, type Locale } from "@/content/presentation-i18n"
 import { LanguageSwitcher } from "@/components/presentation/language-switcher"
 import { PresentationLocaleProvider } from "@/components/presentation/presentation-locale-context"
@@ -39,11 +40,12 @@ export function PresentationShell({
   const langParamKey = "lang"
   const storageKey = "archx-current-slide"
   const localeStorageKey = "archx-locale"
+  const visibleSlides = orderDeckItemsByLocale(slides, locale)
 
-  const clampSlideIndex = (index: number) => Math.min(slides.length - 1, Math.max(0, index))
+  const clampSlideIndex = (index: number) => Math.min(Math.max(visibleSlides.length - 1, 0), Math.max(0, index))
 
   useEffect(() => {
-    if (!isBrowser() || slides.length === 0) return
+    if (!isBrowser() || visibleSlides.length === 0) return
 
     const params = new URLSearchParams(window.location.search)
     const fromQuery = params.get(slideParamKey)
@@ -71,10 +73,20 @@ export function PresentationShell({
         }
       }
     }
-  }, [initialLocale, lockLocale, slides.length])
+  }, [initialLocale, lockLocale, visibleSlides.length])
+
+  useEffect(() => {
+    if (currentSlide > visibleSlides.length - 1) {
+      setCurrentSlide(Math.max(visibleSlides.length - 1, 0))
+    }
+  }, [currentSlide, visibleSlides.length])
+
+  if (visibleSlides.length === 0) {
+    return null
+  }
 
   const updateSlide = (nextIndex: number) => {
-    if (nextIndex === currentSlide || nextIndex < 0 || nextIndex >= slides.length) return
+    if (nextIndex === currentSlide || nextIndex < 0 || nextIndex >= visibleSlides.length) return
     setDirection(nextIndex > currentSlide ? 1 : -1)
     setCurrentSlide(nextIndex)
   }
@@ -113,7 +125,7 @@ export function PresentationShell({
   }, [currentSlide])
 
   useEffect(() => {
-    if (!isBrowser() || slides.length === 0) return
+    if (!isBrowser() || visibleSlides.length === 0) return
 
     const oneBasedSlide = String(currentSlide + 1)
     const params = new URLSearchParams(window.location.search)
@@ -129,10 +141,11 @@ export function PresentationShell({
     if (!lockLocale) {
       window.localStorage.setItem(localeStorageKey, locale)
     }
-  }, [currentSlide, locale, lockLocale, slides.length])
+  }, [currentSlide, locale, lockLocale, visibleSlides.length])
 
-  const currentSlideData = slides[currentSlide]
+  const currentSlideData = visibleSlides[currentSlide]
   const contextLabel = getSlideLabel(currentSlideData.id, locale)
+  const compactProgressCaption = progressCaption?.replace("Proposta Comercial", "Proposta")
 
   const slideVariants: Variants = {
     enter: (customDirection: number) => ({
@@ -219,7 +232,7 @@ export function PresentationShell({
             <div className="font-display text-base font-semibold tabular-nums text-[color:var(--primary-text)] md:text-lg">
               {String(currentSlide + 1).padStart(2, "0")}
               <span className="px-2 text-[color:var(--muted-text)]">/</span>
-              <span className="text-[color:var(--secondary-text)]">{String(slides.length).padStart(2, "0")}</span>
+              <span className="text-[color:var(--secondary-text)]">{String(visibleSlides.length).padStart(2, "0")}</span>
             </div>
           </div>
         </header>
@@ -261,7 +274,7 @@ export function PresentationShell({
             <Button
               variant="ghost"
               onClick={nextSlide}
-              disabled={currentSlide === slides.length - 1}
+              disabled={currentSlide === visibleSlides.length - 1}
               className="h-9 rounded-full border border-white/10 bg-white/[0.02] px-3 text-[color:var(--secondary-text)] hover:bg-white/[0.06] hover:text-[color:var(--accent-main)] md:h-10 md:px-4"
             >
               <ChevronRight className="h-4 w-4" />
@@ -270,19 +283,24 @@ export function PresentationShell({
 
           <div className="flex min-w-[150px] items-center gap-2 sm:min-w-[190px] md:min-w-[260px] md:gap-3">
             {progressCaption ? (
-              <div className="hidden whitespace-nowrap text-[10px] uppercase tracking-[0.14em] text-[color:var(--muted-text)] lg:block">
-                {progressCaption}
-              </div>
+              <>
+                <div className="max-w-[120px] truncate whitespace-nowrap text-[9px] uppercase tracking-[0.1em] text-[color:var(--muted-text)] sm:hidden">
+                  {compactProgressCaption}
+                </div>
+                <div className="hidden max-w-[180px] truncate whitespace-nowrap text-[10px] uppercase tracking-[0.12em] text-[color:var(--muted-text)] sm:block lg:max-w-none lg:truncate-none lg:tracking-[0.14em]">
+                  {progressCaption}
+                </div>
+              </>
             ) : null}
             <div className="h-px flex-1 overflow-hidden rounded-full bg-white/8">
               <motion.div
                 className="h-full bg-[linear-gradient(90deg,rgba(223,44,47,0.15),rgba(223,44,47,1))]"
-                animate={{ width: `${((currentSlide + 1) / slides.length) * 100}%` }}
+                animate={{ width: `${((currentSlide + 1) / visibleSlides.length) * 100}%` }}
                 transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
               />
             </div>
             <div className="hidden items-center gap-2 sm:flex">
-              {slides.map((slide, index) => (
+              {visibleSlides.map((slide, index) => (
                 <button
                   key={slide.id}
                   onClick={() => updateSlide(index)}

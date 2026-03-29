@@ -100,6 +100,63 @@
     box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
   }
 
+  .pdf-deck-root {
+    position: relative;
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background:
+      radial-gradient(circle at 50% 18%, rgba(223, 44, 47, 0.12), transparent 24%),
+      linear-gradient(180deg, #000 0%, #080808 100%);
+    padding: 28px 0 40px;
+  }
+
+  .pdf-deck {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    width: 100%;
+    padding: 0 18px;
+  }
+
+  .pdf-slide {
+    width: min(1600px, 96vw);
+    aspect-ratio: 16 / 9;
+    border-radius: 28px;
+    border: 1px solid var(--border-subtle);
+    background: #000;
+    overflow: hidden;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+  }
+
+  .pdf-slide-inner {
+    width: 100%;
+    height: 100%;
+  }
+
+  .pdf-only-on-print {
+    display: none !important;
+  }
+
+  .pdf-mode-print * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .pdf-mode-print .archx-hero-globe-webgl {
+    display: none !important;
+  }
+
+  .pdf-mode-print .archx-hero-globe {
+    background:
+      radial-gradient(circle at 55% 40%, rgba(223, 44, 47, 0.14), transparent 32%),
+      radial-gradient(circle at 35% 70%, rgba(223, 44, 47, 0.09), transparent 26%),
+      linear-gradient(180deg, rgba(4, 4, 4, 0.98), rgba(0, 0, 0, 0.98));
+  }
+
   .font-display {
     font-family: var(--font-sans), sans-serif;
   }
@@ -114,5 +171,127 @@
       border-left: 0;
       border-right: 0;
     }
+
+    .pdf-deck-root {
+      padding: 0;
+    }
+
+    .pdf-deck {
+      gap: 0;
+      padding: 0;
+    }
+
+    .pdf-slide {
+      width: 100vw;
+      height: 100dvh;
+      aspect-ratio: auto;
+      border-radius: 0;
+      border-left: 0;
+      border-right: 0;
+      box-shadow: none;
+    }
+  }
+}
+
+@page {
+  size: A4 landscape;
+  margin: 0;
+}
+
+@media print {
+  html,
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    background: #000000 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .pdf-deck-root,
+  .pdf-deck,
+  .pdf-slide,
+  .pdf-slide-inner {
+    display: block !important;
+  }
+
+  .pdf-deck-root {
+    height: auto !important;
+    overflow: visible !important;
+    padding: 0 !important;
+    background: #000000 !important;
+  }
+
+  .pdf-deck {
+    gap: 0 !important;
+    padding: 0 !important;
+  }
+
+  .pdf-slide {
+    width: 297mm !important;
+    height: 210mm !important;
+    min-height: 210mm !important;
+    margin: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    overflow: hidden !important;
+    background: #000000 !important;
+    position: relative !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+    break-after: page;
+    page-break-after: always;
+  }
+
+  .pdf-slide:last-child {
+    break-after: auto;
+    page-break-after: auto;
+  }
+
+  .pdf-slide-inner {
+    width: 297mm !important;
+    height: 166.875mm !important;
+    max-width: 297mm !important;
+    max-height: 166.875mm !important;
+    margin: 21.5625mm 0 !important;
+    overflow: hidden !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .pdf-mode-print * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+
+  .pdf-mode-print .viewport-shell,
+  .pdf-mode-print .slide-stage {
+    width: auto !important;
+    height: auto !important;
+    max-height: none !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+
+  .pdf-mode-print .archx-hero-globe-webgl {
+    display: none !important;
+  }
+
+  .pdf-mode-print .archx-hero-globe {
+    background:
+      radial-gradient(circle at 55% 40%, rgba(223, 44, 47, 0.14), transparent 32%),
+      radial-gradient(circle at 35% 70%, rgba(223, 44, 47, 0.09), transparent 26%),
+      linear-gradient(180deg, rgba(4, 4, 4, 0.98), rgba(0, 0, 0, 0.98)) !important;
+  }
+
+  .pdf-hide-on-print {
+    display: none !important;
+  }
+
+  .pdf-only-on-print {
+    display: block !important;
   }
 }

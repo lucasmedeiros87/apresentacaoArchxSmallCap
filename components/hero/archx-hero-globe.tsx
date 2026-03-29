@@ -80,12 +80,12 @@ export function ArchxHeroGlobe() {
   }, [reduceMotion])
 
   return (
-    <div ref={containerRef} className="relative h-full w-full overflow-hidden rounded-[28px]">
+    <div ref={containerRef} className="archx-hero-globe relative h-full w-full overflow-hidden rounded-[28px]">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_55%_40%,rgba(223,44,47,0.12),transparent_32%)]" />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_35%_70%,rgba(223,44,47,0.08),transparent_26%)]" />
       <div className="pointer-events-none absolute inset-0 opacity-[0.08] [background-image:linear-gradient(rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.08)_1px,transparent_1px)] [background-size:28px_28px]" />
 
-      <div className="absolute inset-0 opacity-[0.4]">
+      <div className="archx-hero-globe-webgl absolute inset-0 opacity-[0.4]">
         <Globe
           ref={globeRef}
           width={size.width}
@@ -119,7 +119,7 @@ export function ArchxHeroGlobe() {
         />
       </div>
 
-      <div className="pointer-events-none absolute inset-0">
+      <div className="archx-hero-globe-overlay pointer-events-none absolute inset-0">
         <div className="absolute left-[44%] top-[44%] h-40 w-40 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,_rgba(223,44,47,0.16),_transparent_72%)] blur-3xl" />
         <svg className="absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
           <path d="M21 68 C 24 58, 26 50, 30 42" stroke="rgba(223,44,47,0.65)" strokeWidth="0.26" fill="none" />
