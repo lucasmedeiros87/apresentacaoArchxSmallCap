@@ -36,44 +36,54 @@ export function PresentationShell({
   const [direction, setDirection] = useState(1)
   const wheelLockRef = useRef(false)
   const touchStartRef = useRef<number | null>(null)
+  const initializedRef = useRef(false)
   const slideParamKey = "slide"
   const langParamKey = "lang"
   const storageKey = "archx-current-slide"
   const localeStorageKey = "archx-locale"
   const visibleSlides = orderDeckItemsByLocale(slides, locale)
 
-  const clampSlideIndex = (index: number) => Math.min(Math.max(visibleSlides.length - 1, 0), Math.max(0, index))
-
   useEffect(() => {
-    if (!isBrowser() || visibleSlides.length === 0) return
+    if (!isBrowser() || initializedRef.current) return
 
     const params = new URLSearchParams(window.location.search)
     const fromQuery = params.get(slideParamKey)
     const queryIndex = fromQuery ? Number.parseInt(fromQuery, 10) - 1 : Number.NaN
-    if (Number.isFinite(queryIndex)) {
-      setCurrentSlide(clampSlideIndex(queryIndex))
-    } else {
-      const fromStorage = window.localStorage.getItem(storageKey)
-      const storageIndex = fromStorage ? Number.parseInt(fromStorage, 10) - 1 : Number.NaN
-      if (Number.isFinite(storageIndex)) {
-        setCurrentSlide(clampSlideIndex(storageIndex))
-      }
-    }
 
+    let nextLocale = initialLocale
     if (!lockLocale) {
       const fromQueryLang = params.get(langParamKey)
       const queryLocale = localeOptions.find((option) => option.value === fromQueryLang)?.value
       if (queryLocale) {
-        setLocale(queryLocale)
+        nextLocale = queryLocale
       } else {
         const fromStorageLang = window.localStorage.getItem(localeStorageKey)
         const storageLocale = localeOptions.find((option) => option.value === fromStorageLang)?.value
         if (storageLocale) {
-          setLocale(storageLocale)
+          nextLocale = storageLocale
         }
       }
     }
-  }, [initialLocale, lockLocale, visibleSlides.length])
+
+    if (!lockLocale) {
+      setLocale(nextLocale)
+    }
+
+    const initialVisibleLength = orderDeckItemsByLocale(slides, nextLocale).length
+    const clampInitialSlideIndex = (index: number) => Math.min(Math.max(initialVisibleLength - 1, 0), Math.max(0, index))
+
+    if (Number.isFinite(queryIndex)) {
+      setCurrentSlide(clampInitialSlideIndex(queryIndex))
+    } else {
+      const fromStorage = window.localStorage.getItem(storageKey)
+      const storageIndex = fromStorage ? Number.parseInt(fromStorage, 10) - 1 : Number.NaN
+      if (Number.isFinite(storageIndex)) {
+        setCurrentSlide(clampInitialSlideIndex(storageIndex))
+      }
+    }
+
+    initializedRef.current = true
+  }, [initialLocale, lockLocale, slides])
 
   useEffect(() => {
     if (currentSlide > visibleSlides.length - 1) {
@@ -125,7 +135,7 @@ export function PresentationShell({
   }, [currentSlide])
 
   useEffect(() => {
-    if (!isBrowser() || visibleSlides.length === 0) return
+    if (!isBrowser() || visibleSlides.length === 0 || !initializedRef.current) return
 
     const oneBasedSlide = String(currentSlide + 1)
     const params = new URLSearchParams(window.location.search)

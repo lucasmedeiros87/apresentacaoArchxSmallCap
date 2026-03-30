@@ -1,4 +1,4 @@
-export type Locale = "en" | "pt-BR" | "ar" | "ru"
+﻿export type Locale = "en" | "pt-BR" | "ar" | "ru"
 
 export type SlideTranslation = {
   eyebrow?: string
@@ -125,22 +125,21 @@ const slideTranslations: SlideTranslationMap = {
       eyebrow: "API IMPLEMENTATION",
       headline: "API Implementation",
       subheadline: "Setup and minimum commitment terms structured for predictable commercial onboarding.",
-      body: "Initial conditions organized by service layer, including setup, monthly minimum and contract framing.",
+      body: "Initial conditions organized by service layer, including setup and recurring fee framing.",
       groups: [
         {
           title: "Access Fee (Setup)",
           items: ["Banking as a Service|R$ 45,000.00|R$ 20,000.00", "Crypto as a Service|R$ 15,000.00|R$ 10,000.00"],
         },
         {
-          title: "Monthly minimum",
-          items: ["Monthly minimum|R$ 2,000.00", "Charging starts|From month 2"],
+          title: "Minimum fee",
+          items: ["Minimum fee|R$ 2,000.00", "Charging starts|From month 2"],
         },
         {
           title: "Contract notes",
           items: [
-            "* Monthly minimum of R$ 2,000.00 starts from month 2.",
+            "* Minimum fee of R$ 2,000.00 starts from month 2.",
             "Setup is invoiced after signature with due date up to 10 days.",
-            "Contract period: 3 years.",
           ],
         },
       ],
@@ -148,7 +147,7 @@ const slideTranslations: SlideTranslationMap = {
     "pt-BR": {
       eyebrow: "IMPLANTAÇÃO API",
       headline: "Implantação API",
-      subheadline: "Condições de setup e mensalidade mínima estruturadas para início de operação com previsibilidade comercial.",
+      subheadline: "Condições de setup e fee mínimo estruturadas para início de operação com previsibilidade comercial.",
       body: "Condições iniciais organizadas por camada de serviço, com foco em setup de entrada e regra simples de cobrança recorrente.",
       groups: [
         {
@@ -156,15 +155,14 @@ const slideTranslations: SlideTranslationMap = {
           items: ["Banking as a Service|R$ 45.000,00|R$ 20.000,00", "Crypto as a Service|R$ 15.000,00|R$ 10.000,00"],
         },
         {
-          title: "Mensalidade mínima",
-          items: ["Mensalidade mínima|R$ 2.000,00", "Início da cobrança|A partir do mês 2"],
+          title: "Fee mínimo",
+          items: ["Fee mínimo|R$ 2.000,00", "Início da cobrança|A partir do mês 2"],
         },
         {
           title: "Observações contratuais",
           items: [
-            "* Mensalidade mínima de R$ 2.000,00 cobrada a partir do mês 2.",
+            "* Fee mínimo de R$ 2.000,00 cobrado a partir do mês 2.",
             "Setup faturado após assinatura, com vencimento em até 10 dias.",
-            "Período de contrato: 3 anos.",
           ],
         },
       ],
@@ -178,22 +176,22 @@ const slideTranslations: SlideTranslationMap = {
       body: "Framework for accounts, KYC, PIX, anti-fraud and P2P, organized for executive readability.",
       groups: [
         {
-          title: "Opened accounts PF / PJ",
-          items: ["Active account*|R$ 0.90", "Inactive account|R$ 0.25"],
+          title: "Active accounts PF / PJ",
+          items: ["Active account PF|R$ 0.96", "Active account PJ|R$ 0.18"],
         },
         {
           title: "KYC PF** / KYC PJ**",
-          items: ["KYC PF|R$ 5.00", "KYC PJ|R$ 15.50", "Per request"],
+          items: ["KYC PF|R$ 5.40", "KYC PJ|R$ 18.00"],
         },
         {
           title: "PIX (Cash-in and Cash-out)",
           items: [
             "0 - 25,000|R$ 0.30",
-            "25,001 - 50,000|R$ 0.28",
-            "50,001 - 100,000|R$ 0.26",
-            "100,001 - 250,000|R$ 0.24",
-            "250,001 - 500,000|R$ 0.22",
-            "From 500,001|R$ 0.21",
+            "25,001 - 50,000|R$ 0.29",
+            "50,001 - 100,000|R$ 0.28",
+            "100,001 - 250,000|R$ 0.26",
+            "250,001 - 500,000|R$ 0.25",
+            "From 500,001|R$ 0.24",
           ],
         },
         {
@@ -215,22 +213,22 @@ const slideTranslations: SlideTranslationMap = {
       body: "Framework de pricing para contas, KYC, PIX, antifraude e P2P, organizado para leitura executiva e comparação rápida.",
       groups: [
         {
-          title: "Contas abertas PF / PJ",
-          items: ["Conta ativa*|R$ 0,90", "Conta inativa|R$ 0,25"],
+          title: "Contas ativas PF / PJ",
+          items: ["Conta ativa PF|R$ 0,96", "Conta ativa PJ|R$ 0,18"],
         },
         {
           title: "KYC PF** / KYC PJ**",
-          items: ["KYC PF|R$ 5,00", "KYC PJ|R$ 15,50", "Por solicitação"],
+          items: ["KYC PF|R$ 5,40", "KYC PJ|R$ 18,00"],
         },
         {
           title: "PIX (Cash-in e Cash-out)",
           items: [
             "0 - 25.000|R$ 0,30",
-            "25.001 - 50.000|R$ 0,28",
-            "50.001 - 100.000|R$ 0,26",
-            "100.001 - 250.000|R$ 0,24",
-            "250.001 - 500.000|R$ 0,22",
-            "A partir de 500.001|R$ 0,21",
+            "25.001 - 50.000|R$ 0,29",
+            "50.001 - 100.000|R$ 0,28",
+            "100.001 - 250.000|R$ 0,26",
+            "250.001 - 500.000|R$ 0,25",
+            "A partir de 500.001|R$ 0,24",
           ],
         },
         {
@@ -255,11 +253,11 @@ const slideTranslations: SlideTranslationMap = {
       groups: [
         {
           title: "Boleto",
-          items: ["Issuance|Waived", "Settlement|R$ 1.60", "Write-off|R$ 0.55", "Return|R$ 2.20"],
+          items: ["Issuance|Waived", "Settlement|R$ 1.68", "Write-off|R$ 0.50", "Return|R$ 2.35"],
         },
         {
           title: "Bill Payments",
-          items: ["Compensation slip|R$ 0.18 (remunerated)", "Utilities and Taxes|No remuneration"],
+          items: ["Compensation slip|R$ 0.11 (remunerated)", "Utilities and Taxes|No remuneration"],
         },
       ],
     },
@@ -271,11 +269,11 @@ const slideTranslations: SlideTranslationMap = {
       groups: [
         {
           title: "Boleto",
-          items: ["Emissão|Isento", "Liquidação|R$ 1,60", "Baixa|R$ 0,55", "Devolução|R$ 2,20"],
+          items: ["Emissão|Isento", "Liquidação|R$ 1,68", "Baixa|R$ 0,50", "Devolução|R$ 2,35"],
         },
         {
           title: "Pagamento de conta",
-          items: ["Ficha de compensação|R$ 0,18 (é remunerado)", "Utilities e Tributos|Não remuneramos"],
+          items: ["Ficha de compensação|R$ 0,11 (é remunerado)", "Utilities e Tributos|Não remuneramos"],
         },
       ],
     },
@@ -289,7 +287,10 @@ const slideTranslations: SlideTranslationMap = {
       groups: [
         {
           title: "Crypto as a Service",
-          items: ["BRL → USDT|0.4%", "USDT → USD|0.4%"],
+          items: [
+            "BRL -> USDT|Standard rate 0.57%|Special condition 0.4%",
+            "USDT -> USD|Standard rate 0.57%|Special condition 0.4%",
+          ],
         },
       ],
     },
@@ -301,7 +302,10 @@ const slideTranslations: SlideTranslationMap = {
       groups: [
         {
           title: "Crypto as a Service",
-          items: ["BRL → USDT|0,4%", "USDT → USD|0,4%"],
+          items: [
+            "BRL -> USDT|Taxa padrão 0,57%|Condição especial 0,4%",
+            "USDT -> USD|Taxa padrão 0,57%|Condição especial 0,4%",
+          ],
         },
       ],
     },
@@ -316,19 +320,19 @@ const slideTranslations: SlideTranslationMap = {
         {
           title: "Setup payment",
           items: [
-            "After contract signature, setup is invoiced with due date up to 10 days.",
+            "After contract signature, setup is invoiced with a due date of up to 5 days.",
             "If unpaid, production credentials cannot be released.",
           ],
         },
         {
           title: "Production go-live and charging start",
           items: [
-            "Charging of fees (minimum commitment, monthly, transactional, etc.) follows grace periods negotiated per product and is independent of production go-live.",
+            "The start of fee charging (minimum fee, transactional fees, etc.) follows grace periods negotiated per product and is independent of production go-live.",
           ],
         },
       ],
       closingLine:
-        "Billing is issued on the 5th business day of the month following signature, and the corresponding amount is automatically debited from the client account by day 20 of each month.",
+        "Fees are automatically debited from the account after each transaction. If the minimum fee amount is not reached, the difference is debited on the 5th day of the following month.",
     },
     "pt-BR": {
       eyebrow: "POLÍTICA COMERCIAL",
@@ -339,19 +343,19 @@ const slideTranslations: SlideTranslationMap = {
         {
           title: "Pagamento de setup",
           items: [
-            "Após assinatura do contrato, o setup será faturado com vencimento em até 10 dias.",
+            "Após assinatura do contrato, o setup será faturado com vencimento em até 5 dias.",
             "Caso não seja pago, não será possível receber as credenciais de produção.",
           ],
         },
         {
           title: "Prazo para entrada em produção e início das cobranças",
           items: [
-            "O início da cobrança das tarifas (mínimo de franquia, mensalidades, transacionais, etc.) terá carência conforme negociado em cada produto e independe da entrada em produção do parceiro.",
+            "O início da cobrança das tarifas (fee mínimo, tarifas de transações, etc.) terá carência conforme negociado em cada produto e independe da entrada em produção do parceiro.",
           ],
         },
       ],
       closingLine:
-        "O faturamento será emitido no 5º dia útil do mês subsequente à assinatura, e o valor correspondente será debitado automaticamente da conta do cliente até o dia 20 de cada mês.",
+        "As tarifas serão debitadas automaticamente em conta após cada transação. Caso não seja atingido o valor do fee mínimo, a diferença será debitada no dia 5 do mês subsequente.",
     },
   },
   "slide-07-prices": {
@@ -413,3 +417,5 @@ export const getSlideTranslation = (slideId: string, locale: Locale): SlideTrans
 }
 
 export const getSlideLabel = (slideId: string, locale: Locale) => getSlideTranslation(slideId, locale)?.eyebrow ?? "Slide"
+
+

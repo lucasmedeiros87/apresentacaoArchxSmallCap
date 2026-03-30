@@ -1,4 +1,4 @@
-import type { ArchxSlide } from "@/types/presentation"
+﻿import type { ArchxSlide } from "@/types/presentation"
 
 export const archxSlides: ArchxSlide[] = [
   {
@@ -84,7 +84,7 @@ export const archxSlides: ArchxSlide[] = [
     order: 4,
     eyebrow: "IMPLANTAÇÃO API",
     headline: "Implantação API",
-    subheadline: "Condições de setup e mensalidade mínima estruturadas para início de operação com previsibilidade comercial.",
+    subheadline: "Condições de setup e fee mínimo estruturadas para início de operação com previsibilidade comercial.",
     body: "Condições iniciais organizadas por camada de serviço, com foco em setup de entrada e regra simples de cobrança recorrente.",
     bullets: [],
     groups: [
@@ -93,15 +93,14 @@ export const archxSlides: ArchxSlide[] = [
         items: ["Banking as a Service|R$ 45.000,00|R$ 20.000,00", "Crypto as a Service|R$ 15.000,00|R$ 10.000,00"],
       },
       {
-        title: "Mensalidade mínima",
-        items: ["Mensalidade mínima|R$ 2.000,00", "Início da cobrança|A partir do mês 2"],
+        title: "Fee mínimo",
+        items: ["Fee mínimo|R$ 2.000,00", "Início da cobrança|A partir do mês 2"],
       },
       {
         title: "Observações contratuais",
         items: [
-          "* Mensalidade mínima de R$ 2.000,00 cobrada a partir do mês 2.",
+          "* Fee mínimo de R$ 2.000,00 cobrado a partir do mês 2.",
           "Setup faturado após assinatura, com vencimento em até 10 dias.",
-          "Período de contrato: 3 anos.",
         ],
       },
     ],
@@ -111,7 +110,7 @@ export const archxSlides: ArchxSlide[] = [
     status: "proposed-offering",
     visualNotes: {
       layout: "esquerda editorial e direita em blocos tabulares premium",
-      emphasis: "valores atuais e condição de mensalidade mínima",
+      emphasis: "valores atuais e condição de fee mínimo",
       mediaHint: "linhas sutis e diferenciação entre valor antigo e atual",
       motionHint: "entrada em cascata dos blocos",
     },
@@ -126,22 +125,22 @@ export const archxSlides: ArchxSlide[] = [
     bullets: [],
     groups: [
       {
-        title: "Contas abertas PF / PJ",
-        items: ["Conta ativa*|R$ 0,90", "Conta inativa|R$ 0,25"],
+        title: "Contas ativas PF / PJ",
+        items: ["Conta ativa PF|R$ 0,96", "Conta ativa PJ|R$ 0,18"],
       },
       {
         title: "KYC PF** / KYC PJ**",
-        items: ["KYC PF|R$ 5,00", "KYC PJ|R$ 15,50", "Por solicitação"],
+        items: ["KYC PF|R$ 5,40", "KYC PJ|R$ 18,00"],
       },
       {
         title: "PIX (Cash-in e Cash-out)",
         items: [
           "0 - 25.000|R$ 0,30",
-          "25.001 - 50.000|R$ 0,28",
-          "50.001 - 100.000|R$ 0,26",
-          "100.001 - 250.000|R$ 0,24",
-          "250.001 - 500.000|R$ 0,22",
-          "A partir de 500.001|R$ 0,21",
+          "25.001 - 50.000|R$ 0,29",
+          "50.001 - 100.000|R$ 0,28",
+          "100.001 - 250.000|R$ 0,26",
+          "250.001 - 500.000|R$ 0,25",
+          "A partir de 500.001|R$ 0,24",
         ],
       },
       {
@@ -176,11 +175,11 @@ export const archxSlides: ArchxSlide[] = [
     groups: [
       {
         title: "Boleto",
-        items: ["Emissão|Isento", "Liquidação|R$ 1,60", "Baixa|R$ 0,55", "Devolução|R$ 2,20"],
+        items: ["Emissão|Isento", "Liquidação|R$ 1,68", "Baixa|R$ 0,50", "Devolução|R$ 2,35"],
       },
       {
         title: "Pagamento de conta",
-        items: ["Ficha de compensação|R$ 0,18 (é remunerado)", "Utilities e Tributos|Não remuneramos"],
+        items: ["Ficha de compensação|R$ 0,11 (é remunerado)", "Utilities e Tributos|Não remuneramos"],
       },
     ],
     speakerNotes: "Consolidação das camadas de boleto e pagamento de contas em visual premium.",
@@ -205,7 +204,10 @@ export const archxSlides: ArchxSlide[] = [
     groups: [
       {
         title: "Crypto as a Service",
-        items: ["BRL → USDT|0,4%", "USDT → USD|0,4%"],
+        items: [
+          "BRL -> USDT|Taxa padrão 0,57%|Condição especial 0,4%",
+          "USDT -> USD|Taxa padrão 0,57%|Condição especial 0,4%",
+        ],
       },
     ],
     speakerNotes: "Slide de liquidez com taxas fixas, sem tier, mantendo leitura premium.",
@@ -231,19 +233,19 @@ export const archxSlides: ArchxSlide[] = [
       {
         title: "Pagamento de setup",
         items: [
-          "Após assinatura do contrato, o setup será faturado com vencimento em até 10 dias.",
+          "Após assinatura do contrato, o setup será faturado com vencimento em até 5 dias.",
           "Caso não seja pago, não será possível receber as credenciais de produção.",
         ],
       },
       {
         title: "Prazo para entrada em produção e início das cobranças",
         items: [
-          "O início da cobrança das tarifas (mínimo de franquia, mensalidades, transacionais, etc.) terá carência conforme negociado em cada produto e independe da entrada em produção do parceiro.",
+          "O início da cobrança das tarifas (fee mínimo, tarifas de transações, etc.) terá carência conforme negociado em cada produto e independe da entrada em produção do parceiro.",
         ],
       },
     ],
     closingLine:
-      "O faturamento será emitido no 5º dia útil do mês subsequente à assinatura, e o valor correspondente será debitado automaticamente da conta do cliente até o dia 20 de cada mês.",
+      "As tarifas serão debitadas automaticamente em conta após cada transação. Caso não seja atingido o valor do fee mínimo, a diferença será debitada no dia 5 do mês subsequente.",
     speakerNotes: "Ponte final entre pricing operacional e encerramento institucional.",
     visualType: "cards",
     theme: "dark-accent",
@@ -304,3 +306,5 @@ export const archxSlides: ArchxSlide[] = [
     },
   },
 ]
+
+
