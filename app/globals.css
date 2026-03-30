@@ -157,6 +157,54 @@
       linear-gradient(180deg, rgba(4, 4, 4, 0.98), rgba(0, 0, 0, 0.98));
   }
 
+  /* Force desktop-like layout in /print even when viewport is narrow (print preview panels). */
+  .pdf-mode-print .lg\:block {
+    display: block !important;
+  }
+
+  .pdf-mode-print .lg\:flex {
+    display: flex !important;
+  }
+
+  .pdf-mode-print .lg\:grid {
+    display: grid !important;
+  }
+
+  .pdf-mode-print .lg\:hidden {
+    display: none !important;
+  }
+
+  .pdf-mode-print .lg\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .pdf-mode-print [class~="lg:grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)]"] {
+    grid-template-columns: minmax(0, 0.42fr) minmax(0, 0.58fr) !important;
+  }
+
+  .pdf-mode-print [class~="lg:grid-cols-[minmax(0,0.46fr)_minmax(0,0.54fr)]"] {
+    grid-template-columns: minmax(0, 0.46fr) minmax(0, 0.54fr) !important;
+  }
+
+  .pdf-mode-print [class~="lg:grid-cols-[minmax(0,0.5fr)_minmax(0,0.5fr)]"] {
+    grid-template-columns: minmax(0, 0.5fr) minmax(0, 0.5fr) !important;
+  }
+
+  .pdf-mode-print .lg\:col-span-5,
+  .pdf-mode-print .lg\:col-span-\[5\] {
+    grid-column: span 5 / span 5 !important;
+  }
+
+  .pdf-mode-print .lg\:col-span-6,
+  .pdf-mode-print .lg\:col-span-\[6\] {
+    grid-column: span 6 / span 6 !important;
+  }
+
+  .pdf-mode-print .lg\:col-span-7,
+  .pdf-mode-print .lg\:col-span-\[7\] {
+    grid-column: span 7 / span 7 !important;
+  }
+
   .font-display {
     font-family: var(--font-sans), sans-serif;
   }
@@ -189,6 +237,26 @@
       border-left: 0;
       border-right: 0;
       box-shadow: none;
+    }
+
+    /* Keep print deck in desktop canvas proportions on narrow screens. */
+    .pdf-mode-print.pdf-deck-root {
+      padding: 28px 0 40px;
+    }
+
+    .pdf-mode-print .pdf-deck {
+      gap: 24px;
+      padding: 0 18px;
+    }
+
+    .pdf-mode-print .pdf-slide {
+      width: min(1600px, 96vw);
+      height: auto;
+      aspect-ratio: 16 / 9;
+      border-radius: 28px;
+      border-left: 1px solid var(--border-subtle);
+      border-right: 1px solid var(--border-subtle);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
     }
   }
 }

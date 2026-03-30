@@ -29,7 +29,7 @@ export const localeOptions: Array<{ value: Locale; label: string }> = [
 
 export const defaultLocale: Locale = "en"
 
-export const isRtlLocale = (locale: Locale) => locale === "ar"
+export const isRtlLocale = (_locale: Locale) => false
 
 const slideTranslations: SlideTranslationMap = {
   "slide-01-cover": {
@@ -413,7 +413,7 @@ const slideTranslations: SlideTranslationMap = {
 export const getSlideTranslation = (slideId: string, locale: Locale): SlideTranslation | null => {
   const bySlide = slideTranslations[slideId]
   if (!bySlide) return null
-  return bySlide[locale] ?? bySlide[defaultLocale] ?? null
+  return bySlide["pt-BR"] ?? bySlide[locale] ?? bySlide[defaultLocale] ?? null
 }
 
 export const getSlideLabel = (slideId: string, locale: Locale) => getSlideTranslation(slideId, locale)?.eyebrow ?? "Slide"

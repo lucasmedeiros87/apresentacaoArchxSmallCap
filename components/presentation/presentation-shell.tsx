@@ -218,7 +218,7 @@ export function PresentationShell({
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.02),transparent_18%,transparent_82%,rgba(255,255,255,0.02))]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_18%,rgba(223,44,47,0.08),transparent_22%)]" />
 
-        <header className="relative z-10 flex h-[62px] items-center justify-between border-b border-white/10 bg-black/30 px-3 sm:px-4 md:h-[76px] md:px-8 backdrop-blur-sm">
+        <header className="relative z-10 flex h-[56px] items-center justify-between border-b border-white/10 bg-black/30 px-3 sm:h-[62px] sm:px-4 md:h-[76px] md:px-8 backdrop-blur-sm">
           <div className="flex items-center gap-2 md:gap-4">
             <div className="origin-left scale-[0.84] sm:scale-[0.9] md:scale-100">
               <ArchxLogo />
@@ -248,7 +248,7 @@ export function PresentationShell({
         </header>
 
         <main
-          className="relative z-10 h-[calc(100%-124px)] overflow-hidden md:h-[calc(100%-152px)]"
+          className="relative z-10 h-[calc(100%-112px)] overflow-hidden sm:h-[calc(100%-124px)] md:h-[calc(100%-152px)]"
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >
@@ -271,7 +271,7 @@ export function PresentationShell({
           </AnimatePresence>
         </main>
 
-        <footer className="relative z-10 flex h-[62px] items-center justify-between border-t border-white/10 bg-black/30 px-3 sm:px-4 md:h-[76px] md:px-8 backdrop-blur-sm">
+        <footer className="relative z-10 flex h-[56px] items-center justify-between border-t border-white/10 bg-black/30 px-3 sm:h-[62px] sm:px-4 md:h-[76px] md:px-8 backdrop-blur-sm">
           <div className="flex items-center gap-3">
             <Button
               variant="ghost"

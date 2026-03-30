@@ -12,22 +12,13 @@ const ptBrDeckOrder = [
   "slide-08-closing",
 ] as const
 
-const defaultDeckOrder = [
-  "slide-01-cover",
-  "slide-02-compliance",
-  "slide-03-products",
-  "slide-04-api-implementation",
-  "slide-05-baas",
-  "slide-06-boleto-payments",
-  "slide-07-prices",
-  "slide-08-closing",
-] as const
+const defaultDeckOrder = ptBrDeckOrder
 
 export const deckOrderByLocale: Record<Locale, readonly string[]> = {
   "pt-BR": ptBrDeckOrder,
-  en: defaultDeckOrder,
-  ar: defaultDeckOrder,
-  ru: defaultDeckOrder,
+  en: ptBrDeckOrder,
+  ar: ptBrDeckOrder,
+  ru: ptBrDeckOrder,
 }
 
 export function orderDeckItemsByLocale<T extends { id: string }>(items: T[], locale: Locale): T[] {

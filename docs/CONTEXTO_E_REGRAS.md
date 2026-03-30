@@ -182,6 +182,9 @@ Acao:
 - testar em aba anonima / sem extensoes
 - isso nao costuma ser bug real do codigo
 
+Mitigacao aplicada no projeto:
+- `app/layout.tsx` usa `suppressHydrationWarning` em `<html>` e `<body>` para evitar falso-positivo de mismatch causado por extensoes.
+
 ### B) Cache webpack/.next quebrado
 Erro de `PackFileCacheStrategy` ou runtime inconsistente.
 
@@ -248,3 +251,57 @@ Para continuidade sem perder contexto:
 - copy multilanguage: `content/presentation-i18n.ts`
 - composicao visual: `components/slides/renderers/archx-slide-renderer.tsx`
 
+---
+
+## 14) Regras Estruturais e de Formatacao (Referencia)
+
+Objetivo desta secao:
+- consolidar padroes de layout para evitar corte de texto e regressao visual
+- separar regras de estrutura das regras de copy/comercial
+
+Regra geral (obrigatoria):
+- todo texto deve caber dentro da caixa/componente em desktop e mobile, sem corte visual
+- evitar overflow oculto para mascarar problema de dimensao
+
+Padrao de ajuste quando faltar espaco:
+1. reduzir `gap` entre blocos
+2. reduzir `padding` interno do card
+3. reduzir fonte e `line-height` por breakpoint
+4. compactar labels de cabecalho (uppercase tracking) em cards densos
+5. so depois considerar reestruturacao de grid
+
+Cards densos (ex: listas longas como PIX):
+- usar modo compacto no renderer para blocos com muitas linhas
+- reduzir espacamento vertical de linhas (`pb`/`space-y`)
+- reduzir tamanho de label e valor para manter todas as linhas visiveis
+- manter legibilidade: contraste, hierarquia e alinhamento de coluna
+
+Linhas com valor anterior + valor atual (pricing comparativo):
+- estrutura de dado recomendada: `label|valor_anterior|valor_atual`
+- render:
+  - valor anterior menor e tachado
+  - valor atual em destaque (accent)
+- nunca deixar o valor destacado truncado
+
+Cards textuais longos (ex: politicas/compliance):
+- reduzir tipografia do corpo e cabecalho do card em breakpoints menores
+- reduzir margens superiores (`mt`) e espaco entre cards
+- priorizar exibicao completa do texto dentro do bloco
+
+Higiene de encoding (obrigatoria):
+- manter arquivos de conteudo em UTF-8 consistente
+- evitar copy/paste que gere mojibake (ex: `texto com acentuacao quebrada`)
+- validar antes de commit:
+  - sem sequencias quebradas de encoding
+  - acentuacao correta no browser
+
+Arquivos principais para aplicar estas regras:
+- `components/slides/renderers/archx-slide-renderer.tsx`
+- `content/archx-slides.ts`
+- `content/presentation-i18n.ts`
+
+Checklist rapido de validacao visual:
+- PT-BR e EN
+- desktop: 1440x900, 1600x900, 1728x972
+- mobile: portrait e landscape
+- slides criticos para overflow: 02, 05, 07, 08
