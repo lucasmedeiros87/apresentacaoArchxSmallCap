@@ -9,7 +9,7 @@ export type SlideVisualType =
   | "editorial"
 
 export type SlideContentStatus = "official-site" | "proposed-offering" | "hybrid"
-export type SupportedLocale = "en" | "pt-BR" | "ar" | "ru"
+export type SupportedLocale = "en" | "pt-BR" | "es" | "ar" | "ru"
 
 export type ArchxSlide = {
   id: string

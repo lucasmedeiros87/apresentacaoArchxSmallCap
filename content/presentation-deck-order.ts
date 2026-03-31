@@ -17,6 +17,7 @@ const defaultDeckOrder = ptBrDeckOrder
 export const deckOrderByLocale: Record<Locale, readonly string[]> = {
   "pt-BR": ptBrDeckOrder,
   en: ptBrDeckOrder,
+  es: ptBrDeckOrder,
   ar: ptBrDeckOrder,
   ru: ptBrDeckOrder,
 }

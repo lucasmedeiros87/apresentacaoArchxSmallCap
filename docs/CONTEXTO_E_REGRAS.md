@@ -63,14 +63,16 @@ Exemplo:
 Idiomas ativos:
 - `en` (default global)
 - `pt-BR`
+- `es`
 - `ar`
 - `ru`
 
 Regras:
 - Troca de idioma no mesmo slide (sem reset de navegacao)
 - Sem duplicar paginas por idioma
-- Fallback para EN quando faltar traducao
+- Fallback por ordem: `locale atual -> en -> pt-BR`
 - Para AR: RTL aplicado em blocos textuais, sem espelhar deck inteiro
+- AR e RU devem ter traducao explicita nos slides principais (evitar depender apenas de fallback)
 
 Arquitetura:
 - Dicionario central em `content/presentation-i18n.ts`
@@ -78,6 +80,7 @@ Arquitetura:
 - `isRtlLocale(locale)`
 - `LanguageSwitcher` no shell
 - `localeOverrides` por slide para customizacao especifica em proposta
+- ordem de deck por idioma em `content/presentation-deck-order.ts`
 
 ---
 
@@ -249,7 +252,9 @@ Para continuidade sem perder contexto:
 - regras comerciais: este documento
 - regras de customizacao por cliente: `content/proposal-template.ts`
 - copy multilanguage: `content/presentation-i18n.ts`
+- ordem de slides por idioma: `content/presentation-deck-order.ts`
 - composicao visual: `components/slides/renderers/archx-slide-renderer.tsx`
+- infografico de compliance: `components/slides/archx-compliance-tree.tsx`
 
 ---
 
@@ -287,6 +292,13 @@ Cards textuais longos (ex: politicas/compliance):
 - reduzir tipografia do corpo e cabecalho do card em breakpoints menores
 - reduzir margens superiores (`mt`) e espaco entre cards
 - priorizar exibicao completa do texto dentro do bloco
+
+Infografico de compliance (slide 02):
+- componente dedicado em `components/slides/archx-compliance-tree.tsx`
+- manter hierarquia visual fixa (CORE -> niveis -> AML/CFT) sem sobreposicao
+- em mobile: compactar tipografia e alturas para caber 100% no card
+- em desktop: preservar simetria e espacamento entre nós
+- textos laterais e labels internos devem seguir locale ativo (`en`, `pt-BR`, `es`, `ar`, `ru`)
 
 Higiene de encoding (obrigatoria):
 - manter arquivos de conteudo em UTF-8 consistente

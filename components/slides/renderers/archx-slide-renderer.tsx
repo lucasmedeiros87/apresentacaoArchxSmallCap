@@ -7,6 +7,7 @@ import { getSlideTranslation, isRtlLocale } from "@/content/presentation-i18n"
 import { ArchxHeroGlobe } from "@/components/hero/archx-hero-globe"
 import { usePresentationLocale } from "@/components/presentation/presentation-locale-context"
 import { SlideSurface } from "@/components/presentation/slide-surface"
+import { ArchxComplianceTree } from "@/components/slides/archx-compliance-tree"
 import { cn } from "@/lib/utils"
 import type { ArchxSlide, SlideContentStatus, SlideVisualType } from "@/types/presentation"
 
@@ -1387,16 +1388,6 @@ function ArchxComplianceSlide({ slide, isRtl = false }: { slide: ArchxSlide; isR
   const textDirection = isRtl ? "rtl" : "ltr"
   const textAlign = isRtl ? "text-right" : "text-left"
 
-  const controlNodes = [
-    { title: "KYC / KYB", className: "left-[8%] top-[14%] sm:left-[9%] sm:top-[18%]" },
-    { title: "AML / CFT", className: "right-[8%] top-[16%] sm:right-[9%] sm:top-[20%]" },
-    { title: "Chain Analysis", className: "right-[7%] top-[41%] sm:right-[8%] sm:top-[43%]" },
-    { title: "LGPD / GDPR", className: "left-[9%] bottom-[24%] sm:left-[12%] sm:bottom-[16%]" },
-    { title: "Audit & Reporting", className: "right-[7%] bottom-[30%] sm:right-[8%] sm:bottom-[27%]" },
-    { title: "OFAC", className: "right-[10%] bottom-[14%] sm:right-[11%] sm:bottom-[12%]" },
-    { title: "Regulatory Structures", className: "left-1/2 -translate-x-1/2 bottom-[6%] sm:left-1/2 sm:-translate-x-1/2 sm:bottom-[6%]" },
-  ]
-
   return (
     <section className="relative h-full px-2.5 py-2.5 sm:px-5 sm:py-5 lg:px-8 lg:py-8">
       <div className="grid h-full grid-cols-12 grid-rows-[minmax(0,0.44fr)_minmax(0,0.56fr)] gap-2.5 sm:gap-3 lg:grid-rows-1 lg:gap-6">
@@ -1434,7 +1425,7 @@ function ArchxComplianceSlide({ slide, isRtl = false }: { slide: ArchxSlide; isR
                   <span>{item}</span>
                 </div>
               </motion.div>
-          ))}
+            ))}
           </div>
 
           {slide.closingLine ? (
@@ -1448,61 +1439,9 @@ function ArchxComplianceSlide({ slide, isRtl = false }: { slide: ArchxSlide; isR
           initial={{ opacity: 0, x: 24, scale: 0.99 }}
           animate={{ opacity: 1, x: 0, scale: 1 }}
           transition={{ duration: 0.48, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
-          className="relative col-span-12 min-h-0 overflow-hidden rounded-[18px] border border-white/8 bg-[linear-gradient(180deg,rgba(4,4,4,0.98),rgba(0,0,0,0.98))] lg:col-span-7 lg:rounded-[30px]"
+          className="relative col-span-12 min-h-0 overflow-hidden rounded-[18px] border border-white/8 bg-[linear-gradient(180deg,rgba(4,4,4,0.98),rgba(0,0,0,0.98))] p-2 sm:p-3 lg:col-span-7 lg:rounded-[30px] lg:p-4"
         >
-          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.014)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.014)_1px,transparent_1px)] bg-[size:44px_44px]" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_52%_48%,rgba(223,44,47,0.12),transparent_20%),radial-gradient(circle_at_78%_26%,rgba(223,44,47,0.06),transparent_16%)]" />
-          <div className="absolute inset-[8px] rounded-[14px] border border-white/6 bg-[linear-gradient(180deg,rgba(255,255,255,0.012),rgba(255,255,255,0.004))] sm:inset-[18px] lg:inset-[26px] lg:rounded-[24px]" />
-
-          <div className="absolute inset-[10px] sm:inset-[24px] lg:inset-[34px]">
-            <svg className="absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-              <path d="M49 48 C 38 37, 28 30, 20 24" stroke="rgba(255,255,255,0.18)" strokeWidth="0.22" fill="none" />
-              <path d="M52 48 C 64 40, 73 34, 84 28" stroke="rgba(255,255,255,0.18)" strokeWidth="0.22" fill="none" />
-              <path d="M52 50 C 64 47, 74 45, 84 44" stroke="rgba(255,255,255,0.16)" strokeWidth="0.2" fill="none" />
-              <path d="M49 52 C 42 60, 34 66, 24 76" stroke="rgba(255,255,255,0.17)" strokeWidth="0.22" fill="none" />
-              <path d="M51 52 C 62 60, 74 64, 86 68" stroke="rgba(255,255,255,0.17)" strokeWidth="0.22" fill="none" />
-              <path d="M52 54 C 63 67, 74 76, 84 84" stroke="rgba(255,255,255,0.15)" strokeWidth="0.2" fill="none" />
-              <path d="M51 54 C 56 66, 60 74, 67 82" stroke="rgba(223,44,47,0.34)" strokeWidth="0.24" fill="none" />
-            </svg>
-
-            <div className="absolute left-1/2 top-[48%] z-10 -translate-x-1/2 -translate-y-1/2">
-              <div className="absolute left-1/2 top-1/2 h-48 w-48 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,_rgba(223,44,47,0.16),_transparent_72%)] blur-3xl" />
-              <div className="relative flex h-[5.6rem] w-[5.6rem] items-center justify-center rounded-full border border-[color:var(--accent-main)]/40 bg-[linear-gradient(180deg,rgba(20,20,20,0.99),rgba(6,6,6,0.99))] shadow-[0_0_0_1px_rgba(255,255,255,0.055),0_20px_40px_rgba(0,0,0,0.35)] sm:h-[7rem] sm:w-[7rem] lg:h-[8.5rem] lg:w-[8.5rem]">
-                <div className="text-center">
-                  <div className="text-[9px] font-medium uppercase tracking-[0.16em] text-[color:var(--accent-main)] sm:text-[10px] lg:text-[11px] lg:tracking-[0.18em]">Core</div>
-                  <div className="mt-1 font-display text-[0.72rem] font-semibold leading-3 tracking-[0.08em] text-white sm:text-[0.8rem] sm:leading-4 lg:mt-1.5 lg:text-[0.9rem] lg:tracking-[0.09em]">
-                    <div>ARCHX</div>
-                    <div className="text-[0.54rem] tracking-[0.1em] text-white/84 sm:text-[0.58rem] lg:text-[0.68rem] lg:tracking-[0.13em]">CONTROL LAYER</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {controlNodes.map((node, index) => (
-              <motion.div
-                key={node.title}
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.08 + index * 0.05, duration: 0.24 }}
-                className={cn(
-                  "absolute max-w-[52%] rounded-[10px] border border-white/10 bg-white/[0.05] px-2 py-1 shadow-[0_10px_20px_rgba(0,0,0,0.22)] backdrop-blur-[8px] sm:max-w-none sm:px-3 sm:py-2 lg:rounded-[16px] lg:px-3.5 lg:py-2.5",
-                  node.className,
-                )}
-              >
-                <div className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--accent-main)]" />
-                  <span
-                    className={cn(
-                      "text-[0.5rem] font-medium leading-[0.72rem] text-white/85 whitespace-normal break-words sm:text-[0.7rem] lg:text-[0.78rem] lg:leading-5",
-                      node.title === "Regulatory Structures" ? "text-[0.54rem] sm:text-[0.66rem] lg:text-[0.74rem]" : "",
-                    )}
-                  >
-                    {node.title}
-                  </span>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+          <ArchxComplianceTree className="h-full w-full" />
         </motion.div>
       </div>
     </section>
@@ -2497,3 +2436,4 @@ function ClosingNetworkVisual() {
     </div>
   )
 }
+
